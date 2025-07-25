@@ -1,0 +1,285 @@
+
+
+/* src/styles/globals.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lilita One', cursive;
+}
+
+/* Animations */
+@keyframes bounce_613 {
+  40% {
+    transform: scale(1.4);
+  }
+  60% {
+    transform: scale(0.8);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: rotate(-5deg) translateX(0);
+  }
+  50% {
+    transform: rotate(5deg) translateX(-50%);
+  }
+  100% {
+    transform: rotate(-5deg) translateX(-100%);
+  }
+}
+
+/* Button Styles */
+.btn {
+  width: 5.5em;
+  height: 2em;
+  margin: 0.5em;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn:hover {
+  color: black;
+}
+
+.btn:after {
+  content: "";
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.btn:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+/* Shadow Button */
+.shadow__btn:hover {
+  box-shadow: 0 0 5px rgb(0,140,255),
+              0 0 25px rgb(0,140,255),
+              0 0 50px rgb(0,140,255),
+              0 0 100px rgb(0,140,255);
+}
+
+/* Social Links */
+.social-link1:hover {
+  background: #f09433;
+  background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+  animation: bounce_613 0.4s linear;
+}
+
+.social-link2:hover {
+  background-color: #242c34;
+  animation: bounce_613 0.4s linear;
+}
+
+.social-link3:hover {
+  background-color: #5865f2;
+  animation: bounce_613 0.4s linear;
+}
+
+.social-link4:hover {
+  background-color: #25D366;
+  animation: bounce_613 0.4s linear;
+}
+
+.social-link5:hover {
+  background-color: #ff8000;
+  animation: bounce_613 0.4s linear;
+}
+
+/* Photo Reel */
+.photo-reel {
+  animation: scroll 20s linear infinite;
+}
+
+/* Register button styling */
+.button { 
+  position: relative; 
+  text-decoration: none; 
+  color: #fff; 
+  background: linear-gradient(45deg, #0ce39a, #69007f, #fc0987); 
+  width: 5.5em;
+  height: 2em;
+  font-size: 16px;
+  border-radius: 10px; 
+  cursor: pointer; 
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.button span { 
+  position: relative; 
+  z-index: 1; 
+} 
+
+.button::before { 
+  content: ""; 
+  position: absolute; 
+  inset: 1px; 
+  background: #272727; 
+  border-radius: 9px; 
+  transition: 0.5s; 
+} 
+
+.button:hover::before { 
+  opacity: 0.7; 
+} 
+
+.button::after { 
+  content: ""; 
+  position: absolute; 
+  inset: 0px; 
+  background: linear-gradient(45deg, #0ce39a, #69007f, #fc0987); 
+  border-radius: 9px; 
+  transition: 0.5s; 
+  opacity: 0; 
+  filter: blur(20px); 
+} 
+
+.button:hover:after { 
+  opacity: 1; 
+}
+
+/* Button Container */
+.btn-conteiner { 
+  display: flex; 
+  justify-content: center; 
+  --color-text: #ffffff; 
+  --color-background: #2563eb; 
+  --color-outline: #2563eb80; 
+  --color-shadow: #00000080; 
+} 
+
+.btn-content { 
+  display: flex; 
+  align-items: center; 
+  padding: 5px 30px; 
+  text-decoration: none; 
+  font-family: 'Poppins', sans-serif; 
+  font-weight: 600; 
+  font-size: 30px; 
+  color: var(--color-text); 
+  background: var(--color-background); 
+  transition: 1s; 
+  border-radius: 100px; 
+  box-shadow: 0 0 0.2em 0 var(--color-background); 
+} 
+
+.btn-content:hover, .btn-content:focus { 
+  transition: 0.5s; 
+  -webkit-animation: btn-content 1s; 
+  animation: btn-content 1s; 
+  outline: 0.1em solid transparent; 
+  outline-offset: 0.2em; 
+  box-shadow: 0 0 0.4em 0 var(--color-background); 
+} 
+
+.btn-content .icon-arrow { 
+  transition: 0.5s; 
+  margin-right: 0px; 
+  transform: scale(0.6); 
+} 
+
+.btn-content:hover .icon-arrow { 
+  transition: 0.5s; 
+  margin-right: 25px; 
+} 
+
+.icon-arrow { 
+  width: 20px; 
+  margin-left: 15px; 
+  position: relative; 
+  top: 6%; 
+} 
+
+/* SVG */
+#arrow-icon-one { 
+  transition: 0.4s; 
+  transform: translateX(-60%); 
+} 
+
+#arrow-icon-two { 
+  transition: 0.5s; 
+  transform: translateX(-30%); 
+} 
+
+.btn-content:hover #arrow-icon-three { 
+  animation: color_anim 1s infinite 0.2s; 
+} 
+
+.btn-content:hover #arrow-icon-one { 
+  transform: translateX(0%); 
+  animation: color_anim 1s infinite 0.6s; 
+} 
+
+.btn-content:hover #arrow-icon-two { 
+  transform: translateX(0%); 
+  animation: color_anim 1s infinite 0.4s; 
+} 
+
+/* SVG animations */
+@keyframes color_anim { 
+  0% { 
+    fill: white; 
+  } 
+  50% { 
+    fill: var(--color-background); 
+  } 
+  100% { 
+    fill: white; 
+  } 
+} 
+
+/* Button animations */
+@-webkit-keyframes btn-content { 
+  0% { 
+    outline: 0.2em solid var(--color-background); 
+    outline-offset: 0; 
+  } 
+} 
+
+@keyframes btn-content { 
+  0% { 
+    outline: 0.2em solid var(--color-background); 
+    outline-offset: 0; 
+  } 
+}
