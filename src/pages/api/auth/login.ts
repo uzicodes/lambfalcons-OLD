@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-
+import { loginUser, getCurrentUserData } from '../../../utils/firebaseAuth';
 
 export interface IUser {
   id: string;
@@ -23,6 +23,30 @@ export default async function handler(
     return res.status(422).json({ message: 'Invalid input' });
   }
 
-  // TODO: Replace with Firebase Auth
-  res.status(501).json({ message: 'Authentication not implemented yet. Please use Firebase Auth.' });
+  try {
+    // Login user with Firebase Auth
+    const firebaseUser = await loginUser(email, password);
+    
+    // Get user data from Firestore
+    const userData = await getCurrentUserData(firebaseUser.uid);
+    
+    if (!userData) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'User data not found' 
+      });
+    }
+
+    res.status(200).json({ 
+      success: true, 
+      message: 'Logged in successfully',
+      user: userData
+    });
+  } catch (error: any) {
+    console.error('LOGIN ERROR:', error);
+    res.status(401).json({ 
+      success: false,
+      message: error.message || 'Invalid credentials' 
+    });
+  }
 } 

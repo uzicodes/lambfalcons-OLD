@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getCurrentUserData } from '../../../utils/firebaseAuth';
 
-// TODO: Replace with Firebase Auth
 export interface IUser {
   id: string;
   firstName: string;
@@ -17,6 +17,35 @@ export default async function handler(
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  // TODO: Replace with Firebase Auth
-  res.status(501).json({ message: 'User authentication not implemented yet. Please use Firebase Auth.' });
+  // Get user ID from request headers (set by client)
+  const userId = req.headers['x-user-id'] as string;
+  
+  if (!userId) {
+    return res.status(401).json({ 
+      success: false,
+      message: 'User ID not provided' 
+    });
+  }
+
+  try {
+    const userData = await getCurrentUserData(userId);
+    
+    if (!userData) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'User not found' 
+      });
+    }
+
+    res.status(200).json({ 
+      success: true, 
+      user: userData 
+    });
+  } catch (error: any) {
+    console.error('GET USER ERROR:', error);
+    res.status(500).json({ 
+      success: false,
+      message: error.message || 'Error fetching user data' 
+    });
+  }
 } 
