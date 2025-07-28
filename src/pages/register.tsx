@@ -1,5 +1,6 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
+import { registerUser } from '../utils/firebaseAuth';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -185,29 +186,21 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        // You can set an error state here to show the message to the user
-        console.error(data.message);
-        alert(data.message); // Simple alert for now
-        return;
-      }
+      // Use Firebase Auth directly
+      await registerUser(
+        formData.email,
+        formData.password,
+        formData.firstName,
+        formData.lastName,
+        formData.phoneNumber
+      );
 
       // On successful registration, redirect to the login page
       router.push('/login');
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Registration failed:', error);
-      alert('An unexpected error occurred. Please try again.');
+      alert(error.message || 'Registration failed. Please try again.');
     }
   };
 

@@ -1,5 +1,6 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
+import { loginUser } from '../utils/firebaseAuth';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -125,26 +126,14 @@ const Login = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || 'Login failed!');
-        return;
-      }
-
+      // Use Firebase Auth directly
+      await loginUser(email, password);
+      
       // After successful login, redirect to profile
       router.push('/profile');
-    } catch (error) {
-      console.error('Login request failed:', error);
-      alert('An error occurred during login.');
+    } catch (error: any) {
+      console.error('Login failed:', error);
+      alert(error.message || 'Login failed!');
     }
   };
 

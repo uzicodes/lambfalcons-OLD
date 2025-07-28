@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  // TODO: Replace with Firebase Auth verification
-  // For now, allow all requests to pass through
+  // For Firebase Auth, we'll handle authentication on the client side
+  // The middleware will just allow all requests through
+  // Authentication will be checked in the components/pages themselves
   return NextResponse.next();
 }
 

@@ -1,10 +1,11 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import "../styles/globals.css"; // Your global styles
+import { AuthProvider } from "../contexts/AuthContext";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <AuthProvider>
       <Head>
         <link
           href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Merriweather&family=Poppins:wght@600&display=swap"
@@ -17,6 +18,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#032f3c" />
       </Head>
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, CSSProperties, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Mail, Phone, MapPin, Calendar, Edit, LogOut, User } from 'lucide-react';
 import Head from 'next/head';
+import { useAuth } from '../contexts/AuthContext';
 
 interface UserProfile {
   firstName: string;
@@ -336,6 +337,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Profile = () => {
   const router = useRouter();
+  const { user, userData, loading, logout } = useAuth();
   const [activeMenuItem, setActiveMenuItem] = useState('profile');
   const [isHovered, setIsHovered] = useState<string | null>(null);
   const [isSaveHovered, setIsSaveHovered] = useState(false);
@@ -356,45 +358,32 @@ const Profile = () => {
   const [editedProfile, setEditedProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await fetch('/api/auth/me');
-        if (!response.ok) {
-          // If the token is invalid or expired, the middleware should have already
-          // redirected, but as a fallback, we can redirect here too.
-          router.push('/login');
-          return;
-        }
-        const data = await response.json();
-        if (data.success) {
-          // The API returns a user object with firstName, lastName, email, contactNumber
-          // Let's map it to the structure the component expects.
-          const profile: UserProfile = {
-            firstName: data.user.firstName,
-            lastName: data.user.lastName,
-            email: data.user.email,
-            phone: data.user.contactNumber,
-            // These fields are not in our User model, so we'll provide defaults
-            location: 'Not Set', 
-            joinDate: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-            role: "User",
-            avatar: "" // Default avatar
-          };
-          setUserProfile(profile);
-          setEditedProfile(profile);
-        }
-      } catch (error) {
-        console.error('Failed to fetch user profile:', error);
-        router.push('/login');
-      }
-    };
+    // Check if user is authenticated
+    if (!loading && !user) {
+      router.push('/login');
+      return;
+    }
 
-    fetchUserProfile();
-  }, [router]);
+    // If user is authenticated and we have user data, update the profile
+    if (user && userData) {
+      const profile: UserProfile = {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        phone: userData.contactNumber,
+        location: 'Not Set',
+        joinDate: userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jan 2024',
+        role: "User",
+        avatar: ""
+      };
+      setUserProfile(profile);
+      setEditedProfile(profile);
+    }
+  }, [user, userData, loading, router]);
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await logout();
       router.push('/login');
     } catch (error) {
       console.error('Logout failed:', error);
