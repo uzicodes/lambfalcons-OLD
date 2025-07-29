@@ -488,7 +488,7 @@ const Profile = () => {
         <div style={styles.sidebar}>
           <div style={styles.profileSection}>
             <img 
-              src={userProfile.avatar || "/default-avatar.png"} 
+              src={userProfile.avatar || "/dummy_pic.jpg"} 
               alt="Profile" 
               style={styles.avatar} 
             />
@@ -546,7 +546,7 @@ const Profile = () => {
               <form onSubmit={handleProfileUpdate} style={styles.editForm}>
                 <div style={styles.imageUpload}>
                   <img 
-                    src={userProfile.avatar || "/default-avatar.png"} 
+                    src={userProfile.avatar || "/dummy_pic.jpg"} 
                     alt="Profile" 
                     style={styles.imagePreview} 
                   />
