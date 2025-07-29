@@ -108,12 +108,13 @@ export const updateUserProfile = async (
 };
 
 // Update user profile picture
-export const updateUserProfilePicture = async (uid: string, profilePicture: string): Promise<void> => {
+export const updateUserProfilePicture = async (userId: string, profilePicture: string): Promise<void> => {
   try {
-    const userRef = doc(db, 'users', uid);
+    const userRef = doc(db, 'users', userId);
     await setDoc(userRef, { profilePicture }, { merge: true });
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error) {
+    console.error('Error updating profile picture:', error);
+    throw new Error('Failed to update profile picture');
   }
 };
 

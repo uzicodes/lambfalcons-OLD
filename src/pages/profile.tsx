@@ -523,6 +523,8 @@ const Profile = () => {
               src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
               alt="Profile" 
               style={styles.avatar} 
+              
+              onError={(e) => console.error('Profile image failed to load:', e)}
             />
             <div style={styles.name}>{`${userProfile.firstName} ${userProfile.lastName}`}</div>
             <div style={styles.role}>{userProfile.role}</div>
@@ -589,16 +591,17 @@ const Profile = () => {
                       onChange={handleImageChange}
                       style={{ display: 'none' }}
                     />
-                    <div
-                      style={{
-                        ...styles.uploadButton,
-                        ...(isUploadHovered ? styles.uploadButtonHover : {})
-                      }}
-                      onMouseEnter={() => setIsUploadHovered(true)}
-                      onMouseLeave={() => setIsUploadHovered(false)}
-                    >
-                      {userData?.profilePicture ? "Change Photo" : "Add Photo"}
-                    </div>
+                                      <div
+                    style={{
+                      ...styles.uploadButton,
+                      ...(isUploadHovered ? styles.uploadButtonHover : {})
+                    }}
+                    onMouseEnter={() => setIsUploadHovered(true)}
+                    onMouseLeave={() => setIsUploadHovered(false)}
+                  >
+                    {userData?.profilePicture ? "Change Photo" : "Add Photo"}
+                  </div>
+
                   </label>
                 </div>
 
