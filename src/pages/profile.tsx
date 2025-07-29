@@ -413,21 +413,14 @@ const Profile = () => {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const imageData = reader.result as string;
-        try {
-          await updateProfilePicture(imageData);
-          setUserProfile(prev => ({
-            ...prev,
-            avatar: imageData
-          }));
-        } catch (error) {
-          console.error('Failed to update profile picture:', error);
-          alert('Failed to update profile picture. Please try again.');
-        }
-      };
-      reader.readAsDataURL(file);
+      try {
+        await updateProfilePicture(file);
+        // The profile picture will be updated automatically through the context
+        // We don't need to manually update the local state here
+      } catch (error) {
+        console.error('Failed to update profile picture:', error);
+        alert('Failed to update profile picture. Please try again.');
+      }
     }
   };
 
@@ -436,7 +429,7 @@ const Profile = () => {
     if (!editedProfile) return;
     
     try {
-      // Update location in database if it has changed
+      // Update location in database if it has changed and is not empty
       if (editedProfile.location !== userProfile.location && editedProfile.location.trim() !== '') {
         await updateLocation(editedProfile.location);
       }
@@ -613,8 +606,8 @@ const Profile = () => {
                   <label style={styles.formLabel}>Phone Number</label>
                   <input
                     type="tel"
-                    value={userProfile.phone}
-                    onChange={(e) => setUserProfile(prev => ({ ...prev, phone: e.target.value }))}
+                    value={editedProfile?.phone || userProfile.phone}
+                    onChange={(e) => setEditedProfile(prev => prev ? { ...prev, phone: e.target.value } : null)}
                     style={styles.formInput}
                     required
                   />
@@ -624,8 +617,8 @@ const Profile = () => {
                   <label style={styles.formLabel}>Location</label>
                   <input
                     type="text"
-                    value={userProfile.location}
-                    onChange={(e) => setUserProfile(prev => ({ ...prev, location: e.target.value }))}
+                    value={editedProfile?.location || userProfile.location}
+                    onChange={(e) => setEditedProfile(prev => prev ? { ...prev, location: e.target.value } : null)}
                     style={styles.formInput}
                     placeholder="Enter your location"
                   />

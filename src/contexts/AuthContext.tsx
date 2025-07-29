@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
 import { onAuthStateChange, getCurrentUserData, logoutUser, updateUserProfile, updateUserProfilePicture, updateUserLocation } from '../utils/firebaseAuth';
+import { uploadProfileImage, compressImage } from '../utils/imageUpload';
 import { UserData } from '../utils/firebaseAuth';
 
 interface AuthContextType {
@@ -9,7 +10,7 @@ interface AuthContextType {
   loading: boolean;
   logout: () => Promise<void>;
   updateProfile: (updates: Partial<Omit<UserData, 'id' | 'email' | 'createdAt'>>) => Promise<void>;
-  updateProfilePicture: (profilePicture: string) => Promise<void>;
+  updateProfilePicture: (file: File) => Promise<void>;
   updateLocation: (location: string) => Promise<void>;
 }
 
@@ -79,10 +80,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const updateProfilePicture = async (profilePicture: string) => {
+  const updateProfilePicture = async (file: File) => {
     if (!user) throw new Error('No user is currently signed in');
     try {
-      await updateUserProfilePicture(user.uid, profilePicture);
+      // Compress the image first
+      const compressedFile = await compressImage(file);
+      
+      // Upload to Firebase Storage
+      const downloadURL = await uploadProfileImage(compressedFile, user.uid);
+      
+      // Update the profile picture URL in Firestore
+      await updateUserProfilePicture(user.uid, downloadURL);
+      
       // Refresh user data after update
       const updatedData = await getCurrentUserData(user.uid);
       setUserData(updatedData);
