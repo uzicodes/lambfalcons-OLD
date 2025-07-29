@@ -1,3 +1,9 @@
+// Check if file size is acceptable (max 2MB before compression)
+export const checkFileSize = (file: File): boolean => {
+  const maxSize = 2 * 1024 * 1024; // 2MB
+  return file.size <= maxSize;
+};
+
 // Convert image to base64 for storage in Firestore
 export const convertImageToBase64 = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -11,37 +17,32 @@ export const convertImageToBase64 = (file: File): Promise<string> => {
   });
 };
 
-// Compress image before converting to base64 to reduce file size
-export const compressImage = (file: File, maxWidth: number = 400, maxHeight: number = 400): Promise<File> => {
+// Compress image with specific quality level
+const compressImageWithQuality = (file: File, quality: number): Promise<File> => {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const img = new Image();
 
     img.onload = () => {
-      // Calculate new dimensions
       let { width, height } = img;
 
       if (width > height) {
-        if (width > maxWidth) {
-          height = (height * maxWidth) / width;
-          width = maxWidth;
+        if (width > 400) {
+          height = (height * 400) / width;
+          width = 400;
         }
       } else {
-        if (height > maxHeight) {
-          width = (width * maxHeight) / height;
-          height = maxHeight;
+        if (height > 400) {
+          width = (width * 400) / height;
+          height = 400;
         }
       }
 
-      // Set canvas dimensions
       canvas.width = width;
       canvas.height = height;
-
-      // Draw and compress image
       ctx?.drawImage(img, 0, 0, width, height);
 
-      // Convert to blob with reduced quality
       canvas.toBlob(
         (blob) => {
           if (blob) {
@@ -55,11 +56,38 @@ export const compressImage = (file: File, maxWidth: number = 400, maxHeight: num
           }
         },
         'image/jpeg',
-        0.6 // 60% quality to reduce size further
+        quality
       );
     };
 
     img.onerror = () => reject(new Error('Failed to load image'));
     img.src = URL.createObjectURL(file);
   });
+};
+
+// Compress image with multiple quality levels to ensure it fits in Firestore
+export const compressImageForFirestore = async (file: File): Promise<File> => {
+  // First check original file size
+  if (!checkFileSize(file)) {
+    throw new Error('File size too large. Please select an image smaller than 2MB.');
+  }
+
+  // Try different quality levels to ensure the base64 fits in Firestore (1MB limit)
+  const qualityLevels = [0.6, 0.5, 0.4, 0.3];
+  
+  for (const quality of qualityLevels) {
+    try {
+      const compressedFile = await compressImageWithQuality(file, quality);
+      const base64 = await convertImageToBase64(compressedFile);
+      
+      // Check if base64 size is under 1MB (Firestore limit)
+      if (base64.length < 1000000) { // 1MB = ~1,000,000 characters
+        return compressedFile;
+      }
+    } catch (error) {
+      continue; // Try next quality level
+    }
+  }
+  
+  throw new Error('Image too large even after compression. Please select a smaller image.');
 }; 

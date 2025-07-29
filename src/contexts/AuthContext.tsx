@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
 import { getCurrentUserData, logoutUser, updateUserProfile, updateUserProfilePicture, updateUserLocation, onAuthStateChange } from '../utils/firebaseAuth';
-import { compressImage, convertImageToBase64 } from '../utils/imageUpload';
+import { compressImageForFirestore, convertImageToBase64 } from '../utils/imageUpload';
 import { UserData } from '../utils/firebaseAuth';
 
 interface AuthContextType {
@@ -69,7 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!user) return;
     
     try {
-      const compressedFile = await compressImage(file);
+      const compressedFile = await compressImageForFirestore(file);
       const base64Data = await convertImageToBase64(compressedFile);
       await updateUserProfilePicture(user.uid, base64Data);
       setUserData(prev => prev ? { ...prev, profilePicture: base64Data } : null);

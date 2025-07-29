@@ -591,17 +591,24 @@ const Profile = () => {
                       onChange={handleImageChange}
                       style={{ display: 'none' }}
                     />
-                                      <div
-                    style={{
-                      ...styles.uploadButton,
-                      ...(isUploadHovered ? styles.uploadButtonHover : {})
-                    }}
-                    onMouseEnter={() => setIsUploadHovered(true)}
-                    onMouseLeave={() => setIsUploadHovered(false)}
-                  >
-                    {userData?.profilePicture ? "Change Photo" : "Add Photo"}
-                  </div>
-
+                    <div
+                      style={{
+                        ...styles.uploadButton,
+                        ...(isUploadHovered ? styles.uploadButtonHover : {})
+                      }}
+                      onMouseEnter={() => setIsUploadHovered(true)}
+                      onMouseLeave={() => setIsUploadHovered(false)}
+                    >
+                      {userData?.profilePicture ? "Change Photo" : "Add Photo"}
+                    </div>
+                    <div style={{
+                      fontSize: '12px',
+                      color: 'rgba(255,255,255,0.6)',
+                      marginTop: '5px',
+                      textAlign: 'center'
+                    }}>
+                      Max file size: 2MB • Recommended: 400x400px
+                    </div>
                   </label>
                 </div>
 
