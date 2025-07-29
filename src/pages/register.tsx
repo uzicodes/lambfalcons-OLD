@@ -1,6 +1,7 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import { registerUser } from '../utils/firebaseAuth';
+import { Eye, EyeOff } from 'lucide-react';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -103,6 +104,36 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: '#2563eb',
     transform: 'scale(1.02)',
   },
+  passwordInputContainer: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  passwordInput: {
+    width: '100%',
+    padding: '12px',
+    paddingRight: '45px',
+    borderRadius: '8px',
+    border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    color: '#ffffff',
+    fontSize: '16px',
+    outline: 'none',
+    transition: 'all 0.3s ease',
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: '12px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    cursor: 'pointer',
+    color: 'rgba(255,255,255,0.6)',
+    transition: 'color 0.3s ease',
+    zIndex: 2,
+  },
+  eyeIconHover: {
+    color: 'rgba(255,255,255,0.9)',
+  },
   loginLink: {
     textAlign: 'center',
     marginTop: '20px',
@@ -126,6 +157,8 @@ const Register = () => {
     confirmPassword: '',
   });
   const [isHovered, setIsHovered] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({
     email: '',
     phoneNumber: '',
@@ -291,17 +324,34 @@ const Register = () => {
           
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <input
-              type="password"
-              name="password"
-              style={{
-                ...styles.input,
-                ...(errors.password ? { borderColor: '#ef4444' } : {})
-              }}
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+            <div style={styles.passwordInputContainer}>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                style={{
+                  ...styles.passwordInput,
+                  ...(errors.password ? { borderColor: '#ef4444' } : {})
+                }}
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <div
+                style={{
+                  ...styles.eyeIcon,
+                  ...(showPassword ? styles.eyeIconHover : {})
+                }}
+                onClick={() => setShowPassword(!showPassword)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.9)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
+                }}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
+            </div>
             {errors.password && (
               <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
                 {errors.password}
@@ -311,17 +361,34 @@ const Register = () => {
 
           <div style={styles.inputGroup}>
             <label style={styles.label}>Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              style={{
-                ...styles.input,
-                ...(errors.confirmPassword ? { borderColor: '#ef4444' } : {})
-              }}
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+            <div style={styles.passwordInputContainer}>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                style={{
+                  ...styles.passwordInput,
+                  ...(errors.confirmPassword ? { borderColor: '#ef4444' } : {})
+                }}
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <div
+                style={{
+                  ...styles.eyeIcon,
+                  ...(showConfirmPassword ? styles.eyeIconHover : {})
+                }}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.9)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
+                }}
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
+            </div>
             {errors.confirmPassword && (
               <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
                 {errors.confirmPassword}
