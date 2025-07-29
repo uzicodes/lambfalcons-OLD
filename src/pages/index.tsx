@@ -1,6 +1,7 @@
 import React, { useState, useEffect, CSSProperties } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "next/router";
+import { getImageUrl } from '../utils/imageUpload';
 
 // Constants
 const heroSlides = [
@@ -847,15 +848,15 @@ const Index = () => {
                   height: '40px',
                   marginRight: '10px'
                 }}>
-                  <img 
-                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
-                    alt="Profile" 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
+                  <img
+                    src={getImageUrl(userData?.profilePicture, profilePictureTimestamp)}
+                    alt="Profile"
+                    style={{
+                      width: '100%',
+                      height: '100%',
                       objectFit: 'cover',
                       borderRadius: '50%'
-                    }} 
+                    }}
                   />
                 </a>
                 <button 

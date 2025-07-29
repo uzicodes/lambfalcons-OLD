@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { SiGooglehome } from "react-icons/si";
 import { useAuth } from '../contexts/AuthContext';
+import { getImageUrl } from '../utils/imageUpload';
 
 // Product data (dummy data)
 const jerseyProducts = [
@@ -304,15 +305,15 @@ const Jerseys = () => {
                   height: '40px',
                   marginRight: '10px'
                 }}>
-                  <img 
-                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
-                    alt="Profile" 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
+                  <img
+                    src={getImageUrl(userData?.profilePicture, profilePictureTimestamp)}
+                    alt="Profile"
+                    style={{
+                      width: '100%',
+                      height: '100%',
                       objectFit: 'cover',
                       borderRadius: '50%'
-                    }} 
+                    }}
                   />
                 </a>
                 <button 

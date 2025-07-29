@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { useAuth } from '../contexts/AuthContext';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { deleteUserAccount } from '../utils/firebaseAuth';
+import { getImageUrl } from '../utils/imageUpload';
 
 interface UserProfile {
   firstName: string;
@@ -474,32 +475,7 @@ const Profile = () => {
             <a href="/about" style={styles.navLink}>About Us</a>
             <a href="/members" style={styles.navLink}>Members</a>
             <a href="/jerseys" style={styles.navLink}>Jerseys</a>
-            <button 
-              onClick={() => router.push('/profile')}
-              style={{
-                ...styles.burger,
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                width: '40px',
-                height: '40px'
-              }}
-            >
-              <img 
-                src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
-                alt="Profile" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover',
-                  borderRadius: '50%'
-                }} 
-              />
-            </button>
-                            <button
+            <button
                   onClick={handleLogout}
                   className="Btn"
                 >
@@ -520,7 +496,7 @@ const Profile = () => {
         <div style={styles.sidebar}>
           <div style={styles.profileSection}>
             <img 
-              src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
+              src={getImageUrl(userData?.profilePicture, profilePictureTimestamp)}
               alt="Profile" 
               style={styles.avatar} 
               
@@ -580,9 +556,10 @@ const Profile = () => {
               <form onSubmit={handleProfileUpdate} style={styles.editForm}>
                 <div style={styles.imageUpload}>
                   <img 
-                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
+                    src={getImageUrl(userData?.profilePicture, profilePictureTimestamp)}
                     alt="Profile" 
                     style={styles.imagePreview} 
+                    onError={(e) => console.error('Profile image failed to load:', e)}
                   />
                   <label>
                     <input
