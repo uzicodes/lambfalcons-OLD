@@ -1,9 +1,10 @@
 import React, { useState, CSSProperties, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Mail, Phone, MapPin, Calendar, Edit, LogOut, User } from 'lucide-react';
+import { Mail, Phone, MapPin, Calendar, Edit, LogOut, User, Trash2 } from 'lucide-react';
 import Head from 'next/head';
 import { useAuth } from '../contexts/AuthContext';
 import { ProtectedRoute } from '../components/ProtectedRoute';
+import { deleteUserAccount } from '../utils/firebaseAuth';
 
 interface UserProfile {
   firstName: string;
@@ -391,6 +392,23 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete your account? This action cannot be undone and you will lose all your data permanently.'
+    );
+    
+    if (confirmed) {
+      try {
+        await deleteUserAccount();
+        alert('Account deleted successfully. You can now register again with the same email.');
+        router.push('/register');
+      } catch (error: any) {
+        console.error('Delete account error:', error);
+        alert('Failed to delete account: ' + error.message);
+      }
+    }
+  };
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -416,6 +434,7 @@ const Profile = () => {
   const menuItems = [
     { id: 'profile', icon: User, label: 'Profile' },
     { id: 'edit-profile', icon: Edit, label: 'Edit Profile' },
+    { id: 'delete-account', icon: Trash2, label: 'Delete Account' },
   ];
 
   return (
@@ -521,7 +540,7 @@ const Profile = () => {
                 </div>
               </div>
             </>
-          ) : (
+          ) : activeMenuItem === 'edit-profile' ? (
             <>
               <h2 style={styles.sectionTitle}>Edit Profile</h2>
               <form onSubmit={handleProfileUpdate} style={styles.editForm}>
@@ -586,7 +605,101 @@ const Profile = () => {
                 </button>
               </form>
             </>
-          )}
+          ) : activeMenuItem === 'delete-account' ? (
+            <>
+              <h2 style={styles.sectionTitle}>Delete Account</h2>
+              <div style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                borderRadius: '12px',
+                padding: '24px',
+                marginBottom: '24px'
+              }}>
+                <h3 style={{
+                  color: '#ef4444',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  marginBottom: '16px'
+                }}>
+                  ⚠️ Warning: This action cannot be undone
+                </h3>
+                <p style={{
+                  color: 'rgba(255,255,255,0.8)',
+                  fontSize: '16px',
+                  lineHeight: '1.6',
+                  marginBottom: '20px'
+                }}>
+                  Deleting your account will permanently remove all your data from our system. 
+                  This includes your profile information, preferences, and any associated data.
+                </p>
+                <p style={{
+                  color: 'rgba(255,255,255,0.8)',
+                  fontSize: '16px',
+                  lineHeight: '1.6',
+                  marginBottom: '20px'
+                }}>
+                  We are sad to see you leave :(
+                </p>
+                <p style={{
+                  color: 'rgba(255,255,255,0.8)',
+                  fontSize: '16px',
+                  lineHeight: '1.6',
+                  marginBottom: '20px'
+                }}>
+                  Hope that we will see you again!
+                </p>
+                <div style={{
+                  display: 'flex',
+                  gap: '12px',
+                  flexWrap: 'wrap'
+                }}>
+                  <button
+                    onClick={handleDeleteAccount}
+                    style={{
+                      backgroundColor: '#ef4444',
+                      color: 'white',
+                      padding: '12px 24px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      fontSize: '16px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#dc2626';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#ef4444';
+                    }}
+                  >
+                    Delete My Account
+                  </button>
+                  <button
+                    onClick={() => setActiveMenuItem('profile')}
+                    style={{
+                      backgroundColor: 'transparent',
+                      color: 'rgba(255,255,255,0.8)',
+                      padding: '12px 24px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(255,255,255,0.3)',
+                      fontSize: '16px',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
     </div>

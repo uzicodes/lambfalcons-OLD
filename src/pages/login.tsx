@@ -1,6 +1,7 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import { loginUser } from '../utils/firebaseAuth';
+import { Eye, EyeOff } from 'lucide-react';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -95,6 +96,36 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: '#2563eb',
     transform: 'scale(1.02)',
   },
+  passwordInputContainer: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  passwordInput: {
+    width: '100%',
+    padding: '12px',
+    paddingRight: '45px',
+    borderRadius: '8px',
+    border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    color: '#ffffff',
+    fontSize: '16px',
+    outline: 'none',
+    transition: 'all 0.3s ease',
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: '12px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    cursor: 'pointer',
+    color: 'rgba(255,255,255,0.6)',
+    transition: 'color 0.3s ease',
+    zIndex: 2,
+  },
+  eyeIconHover: {
+    color: 'rgba(255,255,255,0.9)',
+  },
   forgotPassword: {
     textAlign: 'center' as const,
     marginTop: '16px',
@@ -120,6 +151,7 @@ const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -169,13 +201,30 @@ const Login = () => {
           
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <input
-              type="password"
-              style={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div style={styles.passwordInputContainer}>
+              <input
+                type={showPassword ? "text" : "password"}
+                style={styles.passwordInput}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <div
+                style={{
+                  ...styles.eyeIcon,
+                  ...(showPassword ? styles.eyeIconHover : {})
+                }}
+                onClick={() => setShowPassword(!showPassword)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.9)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
+                }}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
+            </div>
           </div>
           
           <button

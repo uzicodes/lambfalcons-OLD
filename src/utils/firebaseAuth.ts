@@ -4,9 +4,10 @@ import {
   signOut, 
   onAuthStateChanged,
   User as FirebaseUser,
-  UserCredential
+  UserCredential,
+  deleteUser
 } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from './firebase';
 
 export interface UserData {
@@ -89,4 +90,22 @@ export const getCurrentUserData = async (uid: string): Promise<UserData | null> 
 // Auth state listener
 export const onAuthStateChange = (callback: (user: FirebaseUser | null) => void) => {
   return onAuthStateChanged(auth, callback);
+};
+
+// Delete user account
+export const deleteUserAccount = async (): Promise<void> => {
+  try {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+
+    // Delete user document from Firestore
+    await deleteDoc(doc(db, 'users', currentUser.uid));
+
+    // Delete user from Firebase Auth
+    await deleteUser(currentUser);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 }; 
