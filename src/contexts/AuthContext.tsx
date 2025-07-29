@@ -75,7 +75,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUserData(prev => prev ? { ...prev, profilePicture: base64Data } : null);
       setProfilePictureTimestamp(Date.now());
     } catch (error) {
-      console.error('Error updating profile picture:', error);
       throw error;
     }
   };

@@ -105,7 +105,6 @@ export const compressImageForFirestore = async (file: File): Promise<File> => {
       
       // Check if base64 size is under 800KB (safe limit for Firestore)
       if (base64.length < 800000) {
-        console.log(`Successfully compressed image: ${setting.maxDimension}x${setting.maxDimension}, quality: ${setting.quality}, base64 size: ${base64.length} chars`);
         return compressedFile;
       }
     } catch (error) {

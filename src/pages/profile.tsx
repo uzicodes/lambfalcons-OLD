@@ -419,7 +419,6 @@ const Profile = () => {
         // The profile picture will be updated automatically through the context
         // We don't need to manually update the local state here
       } catch (error) {
-        console.error('Failed to update profile picture:', error);
         alert('Failed to update profile picture. Please try again.');
       }
     }
@@ -499,8 +498,6 @@ const Profile = () => {
               src={getImageUrl(userData?.profilePicture, profilePictureTimestamp)}
               alt="Profile" 
               style={styles.avatar} 
-              
-              onError={(e) => console.error('Profile image failed to load:', e)}
             />
             <div style={styles.name}>{`${userProfile.firstName} ${userProfile.lastName}`}</div>
             <div style={styles.role}>{userProfile.role}</div>
@@ -559,7 +556,6 @@ const Profile = () => {
                     src={getImageUrl(userData?.profilePicture, profilePictureTimestamp)}
                     alt="Profile" 
                     style={styles.imagePreview} 
-                    onError={(e) => console.error('Profile image failed to load:', e)}
                   />
                   <label>
                     <input
