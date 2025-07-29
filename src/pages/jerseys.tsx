@@ -1,7 +1,6 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { HomeIcon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 // Product data (dummy data)
@@ -287,7 +286,11 @@ const Jerseys = () => {
           </div>
           <div style={styles.navMenuGroup}>
             <a href="/" style={{...styles.navLink, display: 'flex', alignItems: 'center'}}>
-              <HomeIcon size={20} />
+              <img 
+                src="/home_button.png" 
+                alt="Home" 
+                style={{ width: '20px', height: '20px', objectFit: 'contain' }} 
+              />
             </a>
             <a href="/about" style={styles.navLink}>About Us</a>
             <a href="/members" style={styles.navLink}>Members</a>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { CSSProperties } from 'react';
-import { HomeIcon } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 
@@ -11,7 +10,7 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: '#000000',
     color: '#ffffff',
     fontFamily: 'Arial, sans-serif',
-    paddingTop: '100px', // Space for navbar
+    paddingTop: '100px', 
     paddingBottom: '50px',
   },
   navbar: {
@@ -184,7 +183,11 @@ const About = () => {
           </div>
           <div style={styles.navMenuGroup}>
             <a href="/" style={{...styles.navLink, display: 'flex', alignItems: 'center'}}>
-              <HomeIcon size={20} />
+              <img 
+                src="/home_button.png" 
+                alt="Home" 
+                style={{ width: '20px', height: '20px', objectFit: 'contain' }} 
+              />
             </a>
             <a href="/about" style={{...styles.navLink, color: '#3b82f6', fontWeight: 'bold'}}>About Us</a>
             <a href="/members" style={styles.navLink}>Members</a>
