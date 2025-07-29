@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { CSSProperties } from 'react';
 import { Crown, Users, Mail, Phone, MapPin, Calendar, HomeIcon } from 'lucide-react';
 import Head from 'next/head';
+import { useAuth } from '../contexts/AuthContext';
+import { useRouter } from 'next/router';
 
 interface Member {
   id: number;
@@ -335,6 +337,9 @@ const MemberCard = ({ member, isAdmin = false }: { member: Member, isAdmin?: boo
 };
 
 const Members = () => {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
   return (
     <div style={styles.container}>
       <Head>
@@ -360,8 +365,25 @@ const Members = () => {
             <a href="/about" style={styles.navLink}>About Us</a>
             <a href="/members" style={{...styles.navLink, color: '#3b82f6', fontWeight: 'bold'}}>Members</a>
             <a href="/jerseys" style={styles.navLink}>Jerseys</a>
-            <a href="/login" className="button"><span>Log In</span></a>
-            <a href="/register" className="button"><span>Register</span></a>
+            {user ? (
+              <>
+                <a href="/profile" className="button">
+                  <span>Profile</span>
+                </a>
+                <button 
+                  onClick={logout}
+                  className="button"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="button"><span>Log In</span></a>
+                <a href="/register" className="button"><span>Register</span></a>
+              </>
+            )}
           </div>
         </div>
       </div>

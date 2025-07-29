@@ -31,11 +31,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange(async (firebaseUser) => {
+      console.log('Auth state changed:', firebaseUser ? 'User logged in' : 'User logged out');
+      
       if (firebaseUser) {
         try {
           const data = await getCurrentUserData(firebaseUser.uid);
           setUser(firebaseUser);
           setUserData(data);
+          console.log('User data loaded:', data);
         } catch (error) {
           console.error('Error fetching user data:', error);
           setUser(firebaseUser);
@@ -44,6 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       } else {
         setUser(null);
         setUserData(null);
+        console.log('User logged out');
       }
       setLoading(false);
     });

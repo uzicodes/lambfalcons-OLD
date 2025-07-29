@@ -1,6 +1,8 @@
 import React from 'react';
 import { CSSProperties } from 'react';
 import { HomeIcon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { useRouter } from 'next/router';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -164,6 +166,9 @@ const styles: { [key: string]: CSSProperties } = {
 };
 
 const About = () => {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
   return (
     <div style={styles.container}>
       {/* Navbar */}
@@ -184,8 +189,25 @@ const About = () => {
             <a href="/about" style={{...styles.navLink, color: '#3b82f6', fontWeight: 'bold'}}>About Us</a>
             <a href="/members" style={styles.navLink}>Members</a>
             <a href="/jerseys" style={styles.navLink}>Jerseys</a>
-            <a href="/login" className="button"><span>Log In</span></a>
-            <a href="/register" className="button"><span>Register</span></a>
+            {user ? (
+              <>
+                <a href="/profile" className="button">
+                  <span>Profile</span>
+                </a>
+                <button 
+                  onClick={logout}
+                  className="button"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="button"><span>Log In</span></a>
+                <a href="/register" className="button"><span>Register</span></a>
+              </>
+            )}
           </div>
         </div>
       </div>

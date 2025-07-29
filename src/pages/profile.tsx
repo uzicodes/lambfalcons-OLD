@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Mail, Phone, MapPin, Calendar, Edit, LogOut, User } from 'lucide-react';
 import Head from 'next/head';
 import { useAuth } from '../contexts/AuthContext';
+import { ProtectedRoute } from '../components/ProtectedRoute';
 
 interface UserProfile {
   firstName: string;
@@ -418,10 +419,11 @@ const Profile = () => {
   ];
 
   return (
-    <div style={styles.container}>
-      <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </Head>
+    <ProtectedRoute>
+      <div style={styles.container}>
+        <Head>
+          <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        </Head>
 
       {/* Navbar */}
       <div style={styles.navbar}>
@@ -588,6 +590,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

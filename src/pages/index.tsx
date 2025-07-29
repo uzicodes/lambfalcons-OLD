@@ -1,4 +1,6 @@
 import React, { useState, useEffect, CSSProperties } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useRouter } from "next/router";
 
 // Constants
 const heroSlides = [
@@ -721,6 +723,8 @@ const globalStyles = `
 const Index = () => {
   const [mounted, setMounted] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { user, logout } = useAuth();
+  const router = useRouter();
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
   const [rotation, setRotation] = useState(0);
 
@@ -831,12 +835,29 @@ const Index = () => {
             >
               Jerseys
             </a>
-            <a href="/login" className="button">
-              <span>Log In</span>
-            </a>
-            <a href="/register" className="button">
-              <span>Register</span>
-            </a>
+            {user ? (
+              <>
+                <a href="/profile" className="button">
+                  <span>Profile</span>
+                </a>
+                <button 
+                  onClick={logout}
+                  className="button"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="button">
+                  <span>Log In</span>
+                </a>
+                <a href="/register" className="button">
+                  <span>Register</span>
+                </a>
+              </>
+            )}
           </div>
         </div>
       </nav>

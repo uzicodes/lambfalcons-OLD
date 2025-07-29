@@ -2,6 +2,7 @@ import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { HomeIcon } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 // Product data (dummy data)
 const jerseyProducts = [
@@ -248,6 +249,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Jerseys = () => {
   const router = useRouter();
+  const { user, logout } = useAuth();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{[key: number]: string}>({});
@@ -290,8 +292,25 @@ const Jerseys = () => {
             <a href="/about" style={styles.navLink}>About Us</a>
             <a href="/members" style={styles.navLink}>Members</a>
             <a href="/jerseys" style={{...styles.navLink, color: '#3b82f6', fontWeight: 'bold'}}>Jerseys</a>
-            <a href="/login" className="button"><span>Log In</span></a>
-            <a href="/register" className="button"><span>Register</span></a>
+            {user ? (
+              <>
+                <a href="/profile" className="button">
+                  <span>Profile</span>
+                </a>
+                <button 
+                  onClick={logout}
+                  className="button"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="button"><span>Log In</span></a>
+                <a href="/register" className="button"><span>Register</span></a>
+              </>
+            )}
           </div>
         </div>
       </div>
