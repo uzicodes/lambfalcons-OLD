@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CSSProperties } from 'react';
 import { Crown, Users, Mail, Phone, MapPin, Calendar } from 'lucide-react';
+import { SiGooglehome } from "react-icons/si";
 import Head from 'next/head';
 import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
@@ -360,11 +361,7 @@ const Members = () => {
           </div>
           <div style={styles.navMenuGroup}>
             <a href="/" style={{...styles.navLink, display: 'flex', alignItems: 'center'}}>
-              <img 
-                src="/home_button.png" 
-                alt="Home" 
-                style={{ width: '20px', height: '20px', objectFit: 'contain' }} 
-              />
+              <SiGooglehome size={20} />
             </a>
             <a href="/about" style={styles.navLink}>About Us</a>
             <a href="/members" style={{...styles.navLink, color: '#3b82f6', fontWeight: 'bold'}}>Members</a>
