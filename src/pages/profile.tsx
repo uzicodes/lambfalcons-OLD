@@ -340,7 +340,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Profile = () => {
   const router = useRouter();
-  const { user, userData, loading, logout, updateProfilePicture, updateLocation } = useAuth();
+  const { user, userData, loading, profilePictureTimestamp, logout, updateProfilePicture, updateLocation } = useAuth();
   const [activeMenuItem, setActiveMenuItem] = useState('profile');
   const [isHovered, setIsHovered] = useState<string | null>(null);
   const [isSaveHovered, setIsSaveHovered] = useState(false);
@@ -489,7 +489,7 @@ const Profile = () => {
               }}
             >
               <img 
-                src={userProfile.avatar || "/dummy_pic.jpg"} 
+                src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
                 alt="Profile" 
                 style={{ 
                   width: '100%', 
@@ -520,7 +520,7 @@ const Profile = () => {
         <div style={styles.sidebar}>
           <div style={styles.profileSection}>
             <img 
-              src={userProfile.avatar || "/dummy_pic.jpg"} 
+              src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
               alt="Profile" 
               style={styles.avatar} 
             />
@@ -578,7 +578,7 @@ const Profile = () => {
               <form onSubmit={handleProfileUpdate} style={styles.editForm}>
                 <div style={styles.imageUpload}>
                   <img 
-                    src={userProfile.avatar || "/dummy_pic.jpg"} 
+                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
                     alt="Profile" 
                     style={styles.imagePreview} 
                   />
@@ -597,7 +597,7 @@ const Profile = () => {
                       onMouseEnter={() => setIsUploadHovered(true)}
                       onMouseLeave={() => setIsUploadHovered(false)}
                     >
-                      {userProfile.avatar ? "Change Photo" : "Add Photo"}
+                      {userData?.profilePicture ? "Change Photo" : "Add Photo"}
                     </div>
                   </label>
                 </div>

@@ -166,7 +166,7 @@ const styles: { [key: string]: CSSProperties } = {
 };
 
 const About = () => {
-  const { user, userData, logout } = useAuth();
+  const { user, userData, profilePictureTimestamp, logout } = useAuth();
   const router = useRouter();
 
   return (
@@ -202,7 +202,7 @@ const About = () => {
                   marginRight: '10px'
                 }}>
                   <img 
-                    src={userData?.profilePicture || "/dummy_pic.jpg"} 
+                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
                     alt="Profile" 
                     style={{ 
                       width: '100%', 

@@ -249,7 +249,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Jerseys = () => {
   const router = useRouter();
-  const { user, userData, logout } = useAuth();
+  const { user, userData, profilePictureTimestamp, logout } = useAuth();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{[key: number]: string}>({});
@@ -305,7 +305,7 @@ const Jerseys = () => {
                   marginRight: '10px'
                 }}>
                   <img 
-                    src={userData?.profilePicture || "/dummy_pic.jpg"} 
+                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
                     alt="Profile" 
                     style={{ 
                       width: '100%', 

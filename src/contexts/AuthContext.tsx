@@ -8,6 +8,7 @@ interface AuthContextType {
   user: FirebaseUser | null;
   userData: UserData | null;
   loading: boolean;
+  profilePictureTimestamp: number;
   logout: () => Promise<void>;
   updateProfile: (updates: Partial<Omit<UserData, 'id' | 'email' | 'createdAt'>>) => Promise<void>;
   updateProfilePicture: (file: File) => Promise<void>;
@@ -32,6 +33,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [profilePictureTimestamp, setProfilePictureTimestamp] = useState<number>(Date.now());
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange(async (firebaseUser) => {
@@ -92,6 +94,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Update the profile picture URL in Firestore
       await updateUserProfilePicture(user.uid, downloadURL);
       
+      // Update timestamp to force image reload
+      setProfilePictureTimestamp(Date.now());
+      
       // Refresh user data after update
       const updatedData = await getCurrentUserData(user.uid);
       setUserData(updatedData);
@@ -118,6 +123,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     userData,
     loading,
+    profilePictureTimestamp,
     logout,
     updateProfile,
     updateProfilePicture,

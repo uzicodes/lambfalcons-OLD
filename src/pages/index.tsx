@@ -723,7 +723,7 @@ const globalStyles = `
 const Index = () => {
   const [mounted, setMounted] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { user, userData, logout } = useAuth();
+  const { user, userData, profilePictureTimestamp, logout } = useAuth();
   const router = useRouter();
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
   const [rotation, setRotation] = useState(0);
@@ -848,7 +848,7 @@ const Index = () => {
                   marginRight: '10px'
                 }}>
                   <img 
-                    src={userData?.profilePicture || "/dummy_pic.jpg"} 
+                    src={`${userData?.profilePicture || "/dummy_pic.jpg"}?t=${profilePictureTimestamp}`}
                     alt="Profile" 
                     style={{ 
                       width: '100%', 
