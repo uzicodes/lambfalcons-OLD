@@ -1,6 +1,7 @@
 import React, { useState, CSSProperties, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Mail, Phone, MapPin, Calendar, Edit, LogOut, User, Trash2 } from 'lucide-react';
+import { SiGooglehome } from "react-icons/si";
 import Head from 'next/head';
 import { useAuth } from '../contexts/AuthContext';
 import { ProtectedRoute } from '../components/ProtectedRoute';
@@ -339,7 +340,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Profile = () => {
   const router = useRouter();
-  const { user, userData, loading, logout } = useAuth();
+  const { user, userData, loading, logout, updateProfilePicture, updateLocation } = useAuth();
   const [activeMenuItem, setActiveMenuItem] = useState('profile');
   const [isHovered, setIsHovered] = useState<string | null>(null);
   const [isSaveHovered, setIsSaveHovered] = useState(false);
@@ -373,10 +374,10 @@ const Profile = () => {
         lastName: userData.lastName,
         email: userData.email,
         phone: userData.contactNumber,
-        location: 'Not Set',
+        location: userData.location || 'Not Set',
         joinDate: userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jan 2024',
         role: "User",
-        avatar: ""
+        avatar: userData.profilePicture || "/dummy_pic.jpg"
       };
       setUserProfile(profile);
       setEditedProfile(profile);
@@ -409,26 +410,44 @@ const Profile = () => {
     }
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setUserProfile(prev => ({
-          ...prev,
-          avatar: reader.result as string
-        }));
+      reader.onloadend = async () => {
+        const imageData = reader.result as string;
+        try {
+          await updateProfilePicture(imageData);
+          setUserProfile(prev => ({
+            ...prev,
+            avatar: imageData
+          }));
+        } catch (error) {
+          console.error('Failed to update profile picture:', error);
+          alert('Failed to update profile picture. Please try again.');
+        }
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleProfileUpdate = (e: React.FormEvent) => {
+  const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Save updated profile to localStorage
-    localStorage.setItem('userData', JSON.stringify(userProfile));
-    // Switch back to profile view
-    setActiveMenuItem('profile');
+    if (!editedProfile) return;
+    
+    try {
+      // Update location in database if it has changed
+      if (editedProfile.location !== userProfile.location && editedProfile.location.trim() !== '') {
+        await updateLocation(editedProfile.location);
+      }
+      
+      // Update local state
+      setUserProfile(editedProfile);
+      setActiveMenuItem('profile');
+    } catch (error) {
+      console.error('Failed to update profile:', error);
+      alert('Failed to update profile. Please try again.');
+    }
   };
 
   const menuItems = [
@@ -456,15 +475,36 @@ const Profile = () => {
             <div style={styles.logoText}>LAMB FALCONS</div>
           </div>
           <div style={styles.navMenuGroup}>
-            <a href="/" style={styles.navLink}>Home</a>
+            <a href="/" style={{...styles.navLink, display: 'flex', alignItems: 'center'}}>
+              <SiGooglehome size={20} />
+            </a>
             <a href="/about" style={styles.navLink}>About Us</a>
             <a href="/members" style={styles.navLink}>Members</a>
             <a href="/jerseys" style={styles.navLink}>Jerseys</a>
             <button 
               onClick={() => router.push('/profile')}
-              style={styles.burger}
+              style={{
+                ...styles.burger,
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                width: '40px',
+                height: '40px'
+              }}
             >
-              <User size={14} color="#333" />
+              <img 
+                src={userProfile.avatar || "/dummy_pic.jpg"} 
+                alt="Profile" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  borderRadius: '50%'
+                }} 
+              />
             </button>
             <button
               onClick={handleLogout}

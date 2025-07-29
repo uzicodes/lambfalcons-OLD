@@ -16,6 +16,8 @@ export interface UserData {
   lastName: string;
   email: string;
   contactNumber: string;
+  location?: string;
+  profilePicture?: string;
   createdAt: Date;
 }
 
@@ -90,6 +92,39 @@ export const getCurrentUserData = async (uid: string): Promise<UserData | null> 
 // Auth state listener
 export const onAuthStateChange = (callback: (user: FirebaseUser | null) => void) => {
   return onAuthStateChanged(auth, callback);
+};
+
+// Update user profile data
+export const updateUserProfile = async (
+  uid: string, 
+  updates: Partial<Omit<UserData, 'id' | 'email' | 'createdAt'>>
+): Promise<void> => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, updates, { merge: true });
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+// Update user profile picture
+export const updateUserProfilePicture = async (uid: string, profilePicture: string): Promise<void> => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, { profilePicture }, { merge: true });
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+// Update user location
+export const updateUserLocation = async (uid: string, location: string): Promise<void> => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, { location }, { merge: true });
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 };
 
 // Delete user account

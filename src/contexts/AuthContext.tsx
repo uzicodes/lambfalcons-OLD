@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
-import { onAuthStateChange, getCurrentUserData, logoutUser } from '../utils/firebaseAuth';
+import { onAuthStateChange, getCurrentUserData, logoutUser, updateUserProfile, updateUserProfilePicture, updateUserLocation } from '../utils/firebaseAuth';
 import { UserData } from '../utils/firebaseAuth';
 
 interface AuthContextType {
@@ -8,6 +8,9 @@ interface AuthContextType {
   userData: UserData | null;
   loading: boolean;
   logout: () => Promise<void>;
+  updateProfile: (updates: Partial<Omit<UserData, 'id' | 'email' | 'createdAt'>>) => Promise<void>;
+  updateProfilePicture: (profilePicture: string) => Promise<void>;
+  updateLocation: (location: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -63,11 +66,53 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const updateProfile = async (updates: Partial<Omit<UserData, 'id' | 'email' | 'createdAt'>>) => {
+    if (!user) throw new Error('No user is currently signed in');
+    try {
+      await updateUserProfile(user.uid, updates);
+      // Refresh user data after update
+      const updatedData = await getCurrentUserData(user.uid);
+      setUserData(updatedData);
+    } catch (error) {
+      console.error('Update profile error:', error);
+      throw error;
+    }
+  };
+
+  const updateProfilePicture = async (profilePicture: string) => {
+    if (!user) throw new Error('No user is currently signed in');
+    try {
+      await updateUserProfilePicture(user.uid, profilePicture);
+      // Refresh user data after update
+      const updatedData = await getCurrentUserData(user.uid);
+      setUserData(updatedData);
+    } catch (error) {
+      console.error('Update profile picture error:', error);
+      throw error;
+    }
+  };
+
+  const updateLocation = async (location: string) => {
+    if (!user) throw new Error('No user is currently signed in');
+    try {
+      await updateUserLocation(user.uid, location);
+      // Refresh user data after update
+      const updatedData = await getCurrentUserData(user.uid);
+      setUserData(updatedData);
+    } catch (error) {
+      console.error('Update location error:', error);
+      throw error;
+    }
+  };
+
   const value = {
     user,
     userData,
     loading,
     logout,
+    updateProfile,
+    updateProfilePicture,
+    updateLocation,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

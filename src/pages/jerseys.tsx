@@ -249,7 +249,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Jerseys = () => {
   const router = useRouter();
-  const { user, logout } = useAuth();
+  const { user, userData, logout } = useAuth();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{[key: number]: string}>({});
@@ -294,8 +294,26 @@ const Jerseys = () => {
             <a href="/jerseys" style={{...styles.navLink, color: '#3b82f6', fontWeight: 'bold'}}>Jerseys</a>
             {user ? (
               <>
-                <a href="/profile" className="button">
-                  <span>Profile</span>
+                <a href="/profile" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  width: '40px',
+                  height: '40px',
+                  marginRight: '10px'
+                }}>
+                  <img 
+                    src={userData?.profilePicture || "/dummy_pic.jpg"} 
+                    alt="Profile" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '50%'
+                    }} 
+                  />
                 </a>
                 <button 
                   onClick={logout}

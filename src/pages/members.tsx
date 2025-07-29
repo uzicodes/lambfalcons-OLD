@@ -338,7 +338,7 @@ const MemberCard = ({ member, isAdmin = false }: { member: Member, isAdmin?: boo
 };
 
 const Members = () => {
-  const { user, logout } = useAuth();
+  const { user, userData, logout } = useAuth();
   const router = useRouter();
 
   return (
@@ -368,8 +368,26 @@ const Members = () => {
             <a href="/jerseys" style={styles.navLink}>Jerseys</a>
             {user ? (
               <>
-                <a href="/profile" className="button">
-                  <span>Profile</span>
+                <a href="/profile" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  width: '40px',
+                  height: '40px',
+                  marginRight: '10px'
+                }}>
+                  <img 
+                    src={userData?.profilePicture || "/dummy_pic.jpg"} 
+                    alt="Profile" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '50%'
+                    }} 
+                  />
                 </a>
                 <button 
                   onClick={logout}
