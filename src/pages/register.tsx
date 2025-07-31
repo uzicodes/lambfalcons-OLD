@@ -2,6 +2,7 @@ import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import { registerUser } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
+import { RiHome5Line } from "react-icons/ri";
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -144,6 +145,19 @@ const styles: { [key: string]: CSSProperties } = {
     textDecoration: 'none',
     fontWeight: 'bold',
   },
+  homeButton: {
+    display: 'block',
+    marginTop: '20px',
+    textAlign: 'center',
+    color: '#3b82f6',
+    fontSize: '24px',
+    cursor: 'pointer',
+    transition: 'color 0.3s ease',
+  },
+  homeButtonHover: {
+    color: '#2563eb',
+  },
+
 };
 
 const Register = () => {
@@ -165,6 +179,7 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+  const [isHomeButtonHovered, setIsHomeButtonHovered] = useState(false);
 
   const validateEmail = (email: string) => {
     return email.includes('@') && email.includes('.');
@@ -244,6 +259,7 @@ const Register = () => {
         alt="Background" 
         style={styles.backgroundImage}
       />
+
       <div style={styles.registerBox}>
         <div style={styles.logoGroup}>
           <img 
@@ -414,6 +430,18 @@ const Register = () => {
           <a href="/login" style={styles.loginLinkText}>
             Log In
           </a>
+        </div>
+        
+        <div
+          style={{
+            ...styles.homeButton,
+            ...(isHomeButtonHovered ? styles.homeButtonHover : {})
+          }}
+          onClick={() => router.push('/')}
+          onMouseEnter={() => setIsHomeButtonHovered(true)}
+          onMouseLeave={() => setIsHomeButtonHovered(false)}
+        >
+          <RiHome5Line />
         </div>
       </div>
     </div>

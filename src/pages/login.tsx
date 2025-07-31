@@ -2,6 +2,7 @@ import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
 import { loginUser } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
+import { RiHome5Line } from "react-icons/ri";
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -145,6 +146,18 @@ const styles: { [key: string]: CSSProperties } = {
     textDecoration: 'none',
     fontWeight: 'bold',
   },
+  homeButton: {
+    display: 'block',
+    marginTop: '20px',
+    textAlign: 'center',
+    color: '#3b82f6',
+    fontSize: '24px',
+    cursor: 'pointer',
+    transition: 'color 0.3s ease',
+  },
+  homeButtonHover: {
+    color: '#2563eb',
+  },
 };
 
 const Login = () => {
@@ -153,6 +166,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isHomeButtonHovered, setIsHomeButtonHovered] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,6 +265,18 @@ const Login = () => {
           <a href="/register" style={styles.registerLinkText}>
             Register
           </a>
+        </div>
+        
+        <div
+          style={{
+            ...styles.homeButton,
+            ...(isHomeButtonHovered ? styles.homeButtonHover : {})
+          }}
+          onClick={() => router.push('/')}
+          onMouseEnter={() => setIsHomeButtonHovered(true)}
+          onMouseLeave={() => setIsHomeButtonHovered(false)}
+        >
+          <RiHome5Line />
         </div>
       </div>
     </div>
