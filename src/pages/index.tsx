@@ -434,6 +434,47 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: "bold",
     color: "white",
   },
+  scrollingTextSection: {
+    backgroundColor: "#000000",
+    padding: "40px 0",
+    overflow: "hidden",
+    position: "relative",
+  },
+  scrollingTextContainer: {
+    display: "flex",
+    alignItems: "center",
+    whiteSpace: "nowrap",
+    animation: "scrollText 12s linear infinite",
+  },
+  scrollingText: {
+    fontSize: "2rem",
+    fontWeight: "bold",
+    color: "#87b541",
+    textShadow: "0 0 20px rgba(135, 181, 65, 0.5)",
+    margin: "0 40px",
+    fontFamily: "'Cinzel', serif",
+    letterSpacing: "2px",
+  },
+  triangularBorder: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "20px",
+    background: "linear-gradient(45deg, transparent 33.333%, rgba(255,255,255,0.1) 33.333%, rgba(255,255,255,0.1) 66.667%, transparent 66.667%)",
+    backgroundSize: "20px 20px",
+    zIndex: 1,
+  },
+  triangularBorderBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "20px",
+    background: "linear-gradient(-45deg, transparent 33.333%, rgba(255,255,255,0.1) 33.333%, rgba(255,255,255,0.1) 66.667%, transparent 66.667%)",
+    backgroundSize: "20px 20px",
+    zIndex: 1,
+  },
   footer: {
     backgroundColor: "#000000",
     borderTop: "1px solid rgba(255,255,255,0.1)",
@@ -717,6 +758,19 @@ const globalStyles = `
 
   .photo-reel {
     animation: scroll 20s linear infinite;
+  }
+
+  @keyframes scrollText {
+    0% {
+      transform: translateX(50%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .scrolling-text {
+    animation: scrollText 20s linear infinite;
   }
 `;
 
@@ -1167,6 +1221,26 @@ const Index = () => {
           >
             Become a Falcon Today 
           </button>
+        </div>
+      </section>
+
+      {/* Scrolling Text Section */}
+      <section style={styles.scrollingTextSection}>
+        <div style={styles.triangularBorder}></div>
+        <div style={styles.triangularBorderBottom}></div>
+        <div style={styles.scrollingTextContainer}>
+          <span style={styles.scrollingText}>🏆 CHAMPIONS ARE MADE HERE </span>
+          <span style={styles.scrollingText}>⚽ UNLEASH YOUR POTENTIAL </span>
+          <span style={styles.scrollingText}>🔥 JOIN THE FALCONS FAMILY </span>
+          <span style={styles.scrollingText}>💪 TRAIN LIKE A CHAMPION </span>
+          <span style={styles.scrollingText}>🏅 EXCELLENCE IN EVERY MATCH </span>
+          <span style={styles.scrollingText}>⚡ RISE AS ONE </span>
+          <span style={styles.scrollingText}>🏆 CHAMPIONS ARE MADE HERE </span>
+          <span style={styles.scrollingText}>⚽ UNLEASH YOUR POTENTIAL </span>
+          <span style={styles.scrollingText}>🔥 JOIN THE FALCONS FAMILY </span>
+          <span style={styles.scrollingText}>💪 TRAIN LIKE A CHAMPION </span>
+          <span style={styles.scrollingText}>🏅 EXCELLENCE IN EVERY MATCH </span>
+          <span style={styles.scrollingText}>⚡ RISE AS ONE </span>
         </div>
       </section>
 
