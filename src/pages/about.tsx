@@ -114,7 +114,6 @@ const styles: { [key: string]: CSSProperties } = {
     width: "100%",
     height: "400px",
     border: "none",
-    filter: "grayscale(100%)",
     transition: "filter 0.3s ease",
   },
   contactSection: {
@@ -244,7 +243,10 @@ const About = () => {
         <div style={styles.locationSection}>
           <h2 style={styles.locationTitle}>Where to Find Us ?</h2>
           <p style={styles.locationDescription}>
-            Visit our facility at LAMB Hospital. We're located here making it easily accessible for all our members & visitors.
+            Visit our facility at LAMB Hospital Compund. 
+            <br>
+            </br>
+            We're located here making it easily accessible for all our Members & Visitors.
           </p>
           <div style={styles.mapContainer}>
             <div style={styles.mapOverlay} />
