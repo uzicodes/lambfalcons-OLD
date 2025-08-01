@@ -173,7 +173,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
   memberName: {
     fontSize: '20px',
-    fontWeight: 'bold',
+    fontWeight: '400',
     marginBottom: '8px',
     color: '#ffffff',
     fontFamily: "'Libre Baskerville', serif",
@@ -273,7 +273,7 @@ const generalMembers: Member[] = [
   { id: 5, name: "THANGSRIK J CHAMBUGONG", role: "Member", phone: "+1 234-567-8905", image: "", email: "david.b@example.com", location: "Phoenix, USA", joinDate: "May 2020", avatar: "" },
   { id: 6, name: "PREETOM BARMON", role: "Member", phone: "+1 234-567-8906", image: "", email: "lisa.g@example.com", location: "Philadelphia, USA", joinDate: "Jun 2020", avatar: "" },
   { id: 7, name: "UTSASH ANINDHO CHOWDHURY", role: "Member", phone: "+1 234-567-8907", image: "", email: "james.m@example.com", location: "San Antonio, USA", joinDate: "Jul 2020", avatar: "" },
-  { id: 8, name: "BOPON ROY", role: "DESIGNER", phone: "+1 234-567-8908", image: "", email: "sophie.t@example.com", location: "San Diego, USA", joinDate: "Aug 2020", avatar: "" },
+  { id: 8, name: "BOPON ROY", role: "Member", phone: "+1 234-567-8908", image: "", email: "sophie.t@example.com", location: "San Diego, USA", joinDate: "Aug 2020", avatar: "" },
   { id: 9, name: "JESON GOURAB DAS", role: "Member", phone: "+1 234-567-8909", image: "", email: "ryan.a@example.com", location: "Dallas, USA", joinDate: "Sep 2020", avatar: "" },
   { id: 10, name: "JEVIARS MIKHA DAS", role: "Member", phone: "+1 234-567-8910", image: "", email: "maya.p@example.com", location: "San Jose, USA", joinDate: "Oct 2020", avatar: "" },
   { id: 11, name: "PAPON KHALO", role: "Member", phone: "+1 234-567-8911", image: "", email: "connor.d@example.com", location: "Austin, USA", joinDate: "Nov 2020", avatar: "" },
