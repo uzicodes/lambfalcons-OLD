@@ -172,6 +172,9 @@ const About = () => {
 
   return (
     <div style={styles.container}>
+      <Head>
+        <link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+      </Head>
       {/* Navbar */}
       <div style={styles.navbar}>
         <div style={styles.navContent}>
@@ -244,7 +247,7 @@ const About = () => {
         {/* Location Section */}
         <div style={styles.locationSection}>
           <h2 style={styles.locationTitle}>Where to Find Us ?</h2>
-          <p style={styles.locationDescription}>
+          <p style={{...styles.locationDescription, fontFamily: "'Libertinus Sans', sans-serif"}}>
             Visit our facility at LAMB Hospital Compund. 
             <br>
             </br>
@@ -283,8 +286,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>📍</div>
-            <div style={styles.contactLabel}>Address</div>
-            <div style={styles.contactValue}>LAMB Hospital, Parbatipur, Dinajpur</div>
+            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Address</div>
+            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>LAMB Hospital, Parbatipur, Dinajpur</div>
           </div>
 
           <div 
@@ -303,8 +306,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>📞</div>
-            <div style={styles.contactLabel}>Phone</div>
-            <div style={styles.contactValue}>+880 1762-791500</div>
+            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Phone</div>
+            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>+880 1762-791500</div>
           </div>
 
           <div 
@@ -323,8 +326,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>✉️</div>
-            <div style={styles.contactLabel}>Email</div>
-            <div style={styles.contactValue}>utshozi11@gmail.com</div>
+            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Email</div>
+            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>utshozi11@gmail.com</div>
           </div>
 
           <div 
@@ -343,8 +346,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>⏰</div>
-            <div style={styles.contactLabel}>Hours</div>
-            <div style={styles.contactValue}>Sun - Sat: 10AM - 12AM</div>
+            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Hours</div>
+            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>Sun - Sat: 10AM - 12AM</div>
           </div>
         </div>
       </div>
