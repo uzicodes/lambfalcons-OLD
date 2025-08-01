@@ -249,46 +249,46 @@ const adminMembers: Member[] = [
     name: "PROTTOY KHALKO",
     role: "Admin",
     phone: "+1 234-567-8902",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b2e42bca?w=150&h=150&fit=crop&crop=face",
+    image: "",
     email: "sarah.c@example.com",
     location: "Los Angeles, USA",
     joinDate: "Feb 2020",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b2e42bca?w=150&h=150&fit=crop&crop=face"
+    avatar: ""
   },
   {
     id: 3,
     name: "LINKON POLLOB ROY",
     role: "Admin",
     phone: "+1 234-567-8903",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    image: "",
     email: "michael.j@example.com",
     location: "Chicago, USA",
     joinDate: "Mar 2020",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    avatar: ""
   }
 ];
 
 const generalMembers: Member[] = [
-  { id: 4, name: "ARONNO BLESS MONDAL", role: "Member", phone: "+1 234-567-8904", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face", email: "emma.w@example.com", location: "Houston, USA", joinDate: "Apr 2020", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" },
-  { id: 5, name: "THANGSRIK J CHAMBUGONG", role: "Member", phone: "+1 234-567-8905", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face", email: "david.b@example.com", location: "Phoenix, USA", joinDate: "May 2020", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" },
-  { id: 6, name: "PREETOM BARMON", role: "Member", phone: "+1 234-567-8906", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face", email: "lisa.g@example.com", location: "Philadelphia, USA", joinDate: "Jun 2020", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face" },
-  { id: 7, name: "UTSASH ANINDHO CHOWDHURY", role: "Member", phone: "+1 234-567-8907", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face", email: "james.m@example.com", location: "San Antonio, USA", joinDate: "Jul 2020", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" },
-  { id: 8, name: "BOPON ROY", role: "DESIGNER", phone: "+1 234-567-8908", image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face", email: "sophie.t@example.com", location: "San Diego, USA", joinDate: "Aug 2020", avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face" },
-  { id: 9, name: "JESON GOURAB DAS", role: "Member", phone: "+1 234-567-8909", image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face", email: "ryan.a@example.com", location: "Dallas, USA", joinDate: "Sep 2020", avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face" },
-  { id: 10, name: "JEVIARS MIKHA DAS", role: "Member", phone: "+1 234-567-8910", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face", email: "maya.p@example.com", location: "San Jose, USA", joinDate: "Oct 2020", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face" },
-  { id: 11, name: "PAPON KHALO", role: "Member", phone: "+1 234-567-8911", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face", email: "connor.d@example.com", location: "Austin, USA", joinDate: "Nov 2020", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face" },
-  { id: 12, name: "ANDREW SAMUEL HEMBROM", role: "Member", phone: "+1 234-567-8912", image: "https://images.unsplash.com/photo-1521146764736-56c929d59c83?w=150&h=150&fit=crop&crop=face", email: "zoe.m@example.com", location: "Jacksonville, USA", joinDate: "Dec 2020", avatar: "https://images.unsplash.com/photo-1521146764736-56c929d59c83?w=150&h=150&fit=crop&crop=face" },
-  { id: 13, name: "MATTHEW HEMBROM", role: "Member", phone: "+1 234-567-8913", image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face", email: "ethan.w@example.com", location: "Indianapolis, USA", joinDate: "Jan 2021", avatar: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face" },
-  { id: 14, name: "Isabella Lee", role: "Member", phone: "+1 234-567-8914", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face", email: "isabella.l@example.com", location: "San Francisco, USA", joinDate: "Feb 2021", avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face" },
-  { id: 15, name: "Lucas Thompson", role: "Member", phone: "+1 234-567-8915", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face", email: "lucas.t@example.com", location: "Columbus, USA", joinDate: "Mar 2021", avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face" },
-  { id: 16, name: "Aria Kim", role: "Member", phone: "+1 234-567-8916", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face", email: "aria.k@example.com", location: "Fort Worth, USA", joinDate: "Apr 2021", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face" },
-  { id: 17, name: "Noah Rodriguez", role: "Member", phone: "+1 234-567-8917", image: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=150&h=150&fit=crop&crop=face", email: "noah.r@example.com", location: "Charlotte, USA", joinDate: "May 2021", avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=150&h=150&fit=crop&crop=face" },
-  { id: 18, name: "Chloe Jackson", role: "Member", phone: "+1 234-567-8918", image: "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=150&h=150&fit=crop&crop=face", email: "chloe.j@example.com", location: "Seattle, USA", joinDate: "Jun 2021", avatar: "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=150&h=150&fit=crop&crop=face" },
-  { id: 19, name: "Mason Clark", role: "Member", phone: "+1 234-567-8919", image: "https://images.unsplash.com/photo-1578133671540-edad0b3d689e?w=150&h=150&fit=crop&crop=face", email: "mason.c@example.com", location: "Denver, USA", joinDate: "Jul 2021", avatar: "https://images.unsplash.com/photo-1578133671540-edad0b3d689e?w=150&h=150&fit=crop&crop=face" },
-  { id: 20, name: "Avery Lewis", role: "Member", phone: "+1 234-567-8920", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face", email: "avery.l@example.com", location: "Washington D.C., USA", joinDate: "Aug 2021", avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face" },
-  { id: 21, name: "Logan Walker", role: "Member", phone: "+1 234-567-8921", image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face", email: "logan.w@example.com", location: "Boston, USA", joinDate: "Sep 2021", avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face" },
-  { id: 22, name: "Grace Hall", role: "Member", phone: "+1 234-567-8922", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face", email: "grace.h@example.com", location: "Nashville, USA", joinDate: "Oct 2021", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" },
-  { id: 23, name: "Carter Young", role: "Member", phone: "+1 234-567-8923", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face", email: "carter.y@example.com", location: "Portland, USA", joinDate: "Nov 2021", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face" }
+  { id: 4, name: "ARONNO BLESS MONDAL", role: "Member", phone: "+1 234-567-8904", image: "", email: "emma.w@example.com", location: "Houston, USA", joinDate: "Apr 2020", avatar: "" },
+  { id: 5, name: "THANGSRIK J CHAMBUGONG", role: "Member", phone: "+1 234-567-8905", image: "", email: "david.b@example.com", location: "Phoenix, USA", joinDate: "May 2020", avatar: "" },
+  { id: 6, name: "PREETOM BARMON", role: "Member", phone: "+1 234-567-8906", image: "", email: "lisa.g@example.com", location: "Philadelphia, USA", joinDate: "Jun 2020", avatar: "" },
+  { id: 7, name: "UTSASH ANINDHO CHOWDHURY", role: "Member", phone: "+1 234-567-8907", image: "", email: "james.m@example.com", location: "San Antonio, USA", joinDate: "Jul 2020", avatar: "" },
+  { id: 8, name: "BOPON ROY", role: "DESIGNER", phone: "+1 234-567-8908", image: "", email: "sophie.t@example.com", location: "San Diego, USA", joinDate: "Aug 2020", avatar: "" },
+  { id: 9, name: "JESON GOURAB DAS", role: "Member", phone: "+1 234-567-8909", image: "", email: "ryan.a@example.com", location: "Dallas, USA", joinDate: "Sep 2020", avatar: "" },
+  { id: 10, name: "JEVIARS MIKHA DAS", role: "Member", phone: "+1 234-567-8910", image: "", email: "maya.p@example.com", location: "San Jose, USA", joinDate: "Oct 2020", avatar: "" },
+  { id: 11, name: "PAPON KHALO", role: "Member", phone: "+1 234-567-8911", image: "", email: "connor.d@example.com", location: "Austin, USA", joinDate: "Nov 2020", avatar: "" },
+  { id: 12, name: "ANDREW SAMUEL HEMBROM", role: "Member", phone: "+1 234-567-8912", image: "", email: "zoe.m@example.com", location: "Jacksonville, USA", joinDate: "Dec 2020", avatar: "" },
+  { id: 13, name: "MATTHEW HEMBROM", role: "Member", phone: "+1 234-567-8913", image: "", email: "ethan.w@example.com", location: "Indianapolis, USA", joinDate: "Jan 2021", avatar: "" },
+  { id: 14, name: "Isabella Lee", role: "Member", phone: "+1 234-567-8914", image: "", email: "isabella.l@example.com", location: "San Francisco, USA", joinDate: "Feb 2021", avatar: "" },
+  { id: 15, name: "Lucas Thompson", role: "Member", phone: "+1 234-567-8915", image: "", email: "lucas.t@example.com", location: "Columbus, USA", joinDate: "Mar 2021", avatar: "" },
+  { id: 16, name: "Aria Kim", role: "Member", phone: "+1 234-567-8916", image: "", email: "aria.k@example.com", location: "Fort Worth, USA", joinDate: "Apr 2021", avatar: "" },
+  { id: 17, name: "Noah Rodriguez", role: "Member", phone: "+1 234-567-8917", image: "", email: "noah.r@example.com", location: "Charlotte, USA", joinDate: "May 2021", avatar: "" },
+  { id: 18, name: "Chloe Jackson", role: "Member", phone: "+1 234-567-8918", image: "", email: "chloe.j@example.com", location: "Seattle, USA", joinDate: "Jun 2021", avatar: "" },
+  { id: 19, name: "Mason Clark", role: "Member", phone: "+1 234-567-8919", image: "", email: "mason.c@example.com", location: "Denver, USA", joinDate: "Jul 2021", avatar: "" },
+  { id: 20, name: "Avery Lewis", role: "Member", phone: "+1 234-567-8920", image: "", email: "avery.l@example.com", location: "Washington D.C., USA", joinDate: "Aug 2021", avatar: "" },
+  { id: 21, name: "Logan Walker", role: "Member", phone: "+1 234-567-8921", image: "", email: "logan.w@example.com", location: "Boston, USA", joinDate: "Sep 2021", avatar: "" },
+  { id: 22, name: "Grace Hall", role: "Member", phone: "+1 234-567-8922", image: "", email: "grace.h@example.com", location: "Nashville, USA", joinDate: "Oct 2021", avatar: "" },
+  { id: 23, name: "Carter Young", role: "Member", phone: "+1 234-567-8923", image: "", email: "carter.y@example.com", location: "Portland, USA", joinDate: "Nov 2021", avatar: "" }
 ];
 
 const MemberCard = ({ member, isAdmin = false }: { member: Member, isAdmin?: boolean }) => {
