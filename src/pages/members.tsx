@@ -176,6 +176,10 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: 'bold',
     marginBottom: '8px',
     color: '#ffffff',
+    fontFamily: "'Libre Baskerville', serif",
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   memberRole: {
     fontSize: '14px',
@@ -346,6 +350,7 @@ const Members = () => {
     <div style={styles.container}>
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
       </Head>
       {/* Navbar */}
       <div style={styles.navbar}>
