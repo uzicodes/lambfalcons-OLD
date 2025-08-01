@@ -1,5 +1,5 @@
 {
   "storage": {
-    "rules": "q"
+    "rules": "firebase-storage.rules"
   }
 }
