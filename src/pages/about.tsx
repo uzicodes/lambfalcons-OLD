@@ -175,14 +175,16 @@ const About = () => {
       {/* Navbar */}
       <div style={styles.navbar}>
         <div style={styles.navContent}>
-          <div style={styles.logoGroup}>
-            <img 
-              src="/falcons_logo.png" 
-              alt="LAMB FALCONS Logo" 
-              style={{ width: '65px', height: '65px', objectFit: 'contain' }} 
-            />
-            <div style={styles.logoText}>LAMB FALCONS</div>
-          </div>
+          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={styles.logoGroup}>
+              <img 
+                src="/falcons_logo.png" 
+                alt="LAMB FALCONS Logo" 
+                style={{ width: '65px', height: '65px', objectFit: 'contain' }} 
+              />
+              <div style={styles.logoText}>LAMB FALCONS</div>
+            </div>
+          </a>
           <div style={styles.navMenuGroup}>
             <a href="/" style={{...styles.navLink, display: 'flex', alignItems: 'center'}}>
               <SiGooglehome size={20} />

@@ -261,13 +261,15 @@ const Register = () => {
       />
 
       <div style={styles.registerBox}>
-        <div style={styles.logoGroup}>
-          <img 
-            src="/falcons_logo.png" 
-            alt="LAMB FALCONS Logo" 
-            style={{ width: '80px', height: '80px', objectFit: 'contain' }} 
-          />
-        </div>
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center' }}>
+          <div style={styles.logoGroup}>
+            <img 
+              src="/falcons_logo.png" 
+              alt="LAMB FALCONS Logo" 
+              style={{ width: '80px', height: '80px', objectFit: 'contain' }} 
+            />
+          </div>
+        </a>
         
         <h1 style={styles.title}>Create Account</h1>
         

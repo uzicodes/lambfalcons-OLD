@@ -854,16 +854,18 @@ const Index = () => {
       {/* Navigation */}
       <nav style={styles.navbar}>
         <div style={styles.navContent}>
-          <div style={styles.logoGroup}>
-            <div>
-              <img 
-                src="/falcons_logo.png" 
-                alt="LAMB FALCONS Logo" 
-                style={{ width: '65px', height: '65px', objectFit: 'contain' }} 
-              />
+          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            <div style={styles.logoGroup}>
+              <div>
+                <img 
+                  src="/falcons_logo.png" 
+                  alt="LAMB FALCONS Logo" 
+                  style={{ width: '65px', height: '65px', objectFit: 'contain' }} 
+                />
+              </div>
+              <div style={{ ...styles.logoText, fontSize: "25px", marginRight: "20px" }}>LAMB FALCONS</div>
             </div>
-            <div style={{ ...styles.logoText, fontSize: "25px", marginRight: "20px" }}>LAMB FALCONS</div>
-          </div>
+          </a>
 
           <div style={styles.navMenuGroup}>
             <a
