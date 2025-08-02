@@ -189,6 +189,8 @@ const styles: { [key: string]: CSSProperties } = {
     fontSize: '16px',
     outline: 'none',
     transition: 'all 0.3s ease',
+    fontFamily: "'PT Serif', serif",
+    fontWeight: 400,
   },
   formInputFocus: {
     borderColor: '#f0846d',
@@ -352,9 +354,9 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
     firstName: "John",
     lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "+1 234-567-8900",
-    location: "",
+    email: "utshozi11@gmail.com",
+    phone: "01762791500",
+    location: "LAMB Hospital",
     joinDate: "Jan 2024",
     role: "User",
     avatar: ""
@@ -362,9 +364,9 @@ const Profile = () => {
   const [editedProfile, setEditedProfile] = useState<UserProfile>({
     firstName: "John",
     lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "+1 234-567-8900",
-    location: "",
+    email: "utshozi11@gmail.com",
+    phone: "01762791500",
+    location: "LAMB Hospital",
     joinDate: "Jan 2024",
     role: "User",
     avatar: ""
@@ -479,6 +481,7 @@ const Profile = () => {
       <div style={styles.container}>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400&display=swap" rel="stylesheet" />
         </Head>
 
       {/* Navbar */}
