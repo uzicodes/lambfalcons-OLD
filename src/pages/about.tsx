@@ -144,11 +144,6 @@ const styles: { [key: string]: CSSProperties } = {
     transition: "all 0.3s ease",
     cursor: "pointer",
   },
-  contactCardHover: {
-    transform: "translateY(-5px)",
-    backgroundColor: "rgba(255,255,255,0.08)",
-    borderColor: "rgba(255,255,255,0.2)",
-  },
   contactIcon: {
     fontSize: "2.5rem",
     marginBottom: "16px",
@@ -164,53 +159,32 @@ const styles: { [key: string]: CSSProperties } = {
     color: "#ffffff",
     fontWeight: 500,
   },
-  gallerySection: {
-    marginTop: '80px',
-    textAlign: 'center',
-  },
-  galleryTitle: {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    marginBottom: '40px',
-    color: '#e9a090',
-    fontFamily: "'Cinzel', serif",
-  },
-  galleryGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '20px',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  },
-  galleryImageWrapper: {
-    position: 'relative',
-    overflow: 'hidden',
-    borderRadius: '12px',
-    border: '1px solid rgba(255,255,255,0.1)',
-    cursor: 'pointer',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-  },
-  galleryImageWrapperHover: {
-    transform: 'scale(1.03)',
-    boxShadow: '0 8px 15px rgba(0,0,0,0.3)',
-  },
-  galleryImg: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    display: 'block',
-  },
+
 };
 
-const About = () => {
+const About: React.FC = () => {
   const { user, userData, profilePictureTimestamp, logout } = useAuth();
   const router = useRouter();
+
+  const handleContactCardHover = (e: React.MouseEvent<HTMLDivElement>, isHovering: boolean) => {
+    const target = e.currentTarget;
+    if (isHovering) {
+      target.style.transform = "translateY(-5px)";
+      target.style.backgroundColor = "rgba(255,255,255,0.08)";
+      target.style.borderColor = "rgba(255,255,255,0.2)";
+    } else {
+      target.style.transform = "translateY(0)";
+      target.style.backgroundColor = "rgba(255,255,255,0.05)";
+      target.style.borderColor = "rgba(255,255,255,0.1)";
+    }
+  };
 
   return (
     <div style={styles.container}>
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
       </Head>
+      
       {/* Navbar */}
       <div style={styles.navbar}>
         <div style={styles.navContent}>
@@ -284,9 +258,8 @@ const About = () => {
         <div style={styles.locationSection}>
           <h2 style={styles.locationTitle}>Where to Find Us ?</h2>
           <p style={{...styles.locationDescription, fontFamily: "'Libertinus Sans', sans-serif"}}>
-            Visit our facility at LAMB Hospital Compund. 
-            <br>
-            </br>
+            Visit our facility at LAMB Hospital Compound. 
+            <br />
             We're located here making it easily accessible for all our Members & Visitors.
           </p>
           <div style={styles.mapContainer}>
@@ -297,58 +270,11 @@ const About = () => {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
           </div>
         </div>
 
-        {/* Team Photo Gallery */}
-        <div style={styles.gallerySection}>
-          <h2 style={styles.galleryTitle}>Our Team</h2>
-          <div style={styles.galleryGrid}>
-            <div style={styles.galleryImageWrapper}>
-              <img 
-                src="/team1.jpg" 
-                alt="Team Member 1" 
-                style={styles.galleryImg}
-              />
-            </div>
-            <div style={styles.galleryImageWrapper}>
-              <img 
-                src="/team2.jpg" 
-                alt="Team Member 2" 
-                style={styles.galleryImg}
-              />
-            </div>
-            <div style={styles.galleryImageWrapper}>
-              <img 
-                src="/team3.jpg" 
-                alt="Team Member 3" 
-                style={styles.galleryImg}
-              />
-            </div>
-            <div style={styles.galleryImageWrapper}>
-              <img 
-                src="/team4.jpg" 
-                alt="Team Member 4" 
-                style={styles.galleryImg}
-              />
-            </div>
-            <div style={styles.galleryImageWrapper}>
-              <img 
-                src="/team5.jpg" 
-                alt="Team Member 5" 
-                style={styles.galleryImg}
-              />
-            </div>
-            <div style={styles.galleryImageWrapper}>
-              <img 
-                src="/team6.jpg" 
-                alt="Team Member 6" 
-                style={styles.galleryImg}
-              />
-            </div>
-          </div>
-        </div>
+
       </div>
 
       {/* Contact Section */}
@@ -357,18 +283,8 @@ const About = () => {
         <div style={styles.contactGrid}>
           <div 
             style={styles.contactCard}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(-5px)";
-              target.style.backgroundColor = "rgba(255,255,255,0.08)";
-              target.style.borderColor = "rgba(255,255,255,0.2)";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(0)";
-              target.style.backgroundColor = "rgba(255,255,255,0.05)";
-              target.style.borderColor = "rgba(255,255,255,0.1)";
-            }}
+            onMouseEnter={(e) => handleContactCardHover(e, true)}
+            onMouseLeave={(e) => handleContactCardHover(e, false)}
           >
             <div style={styles.contactIcon}>📍</div>
             <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Address</div>
@@ -377,18 +293,8 @@ const About = () => {
 
           <div 
             style={styles.contactCard}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(-5px)";
-              target.style.backgroundColor = "rgba(255,255,255,0.08)";
-              target.style.borderColor = "rgba(255,255,255,0.2)";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(0)";
-              target.style.backgroundColor = "rgba(255,255,255,0.05)";
-              target.style.borderColor = "rgba(255,255,255,0.1)";
-            }}
+            onMouseEnter={(e) => handleContactCardHover(e, true)}
+            onMouseLeave={(e) => handleContactCardHover(e, false)}
           >
             <div style={styles.contactIcon}>📞</div>
             <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Phone</div>
@@ -397,18 +303,8 @@ const About = () => {
 
           <div 
             style={styles.contactCard}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(-5px)";
-              target.style.backgroundColor = "rgba(255,255,255,0.08)";
-              target.style.borderColor = "rgba(255,255,255,0.2)";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(0)";
-              target.style.backgroundColor = "rgba(255,255,255,0.05)";
-              target.style.borderColor = "rgba(255,255,255,0.1)";
-            }}
+            onMouseEnter={(e) => handleContactCardHover(e, true)}
+            onMouseLeave={(e) => handleContactCardHover(e, false)}
           >
             <div style={styles.contactIcon}>✉️</div>
             <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Email</div>
@@ -417,18 +313,8 @@ const About = () => {
 
           <div 
             style={styles.contactCard}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(-5px)";
-              target.style.backgroundColor = "rgba(255,255,255,0.08)";
-              target.style.borderColor = "rgba(255,255,255,0.2)";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget;
-              target.style.transform = "translateY(0)";
-              target.style.backgroundColor = "rgba(255,255,255,0.05)";
-              target.style.borderColor = "rgba(255,255,255,0.1)";
-            }}
+            onMouseEnter={(e) => handleContactCardHover(e, true)}
+            onMouseLeave={(e) => handleContactCardHover(e, false)}
           >
             <div style={styles.contactIcon}>⏰</div>
             <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Hours</div>
@@ -440,4 +326,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;
