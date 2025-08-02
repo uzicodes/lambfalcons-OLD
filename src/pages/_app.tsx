@@ -2,22 +2,25 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import "../styles/globals.css"; // Your global styles
 import { AuthProvider } from "../contexts/AuthContext";
+import InactivityWrapper from "../components/InactivityWrapper";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Merriweather&family=Poppins:wght@600&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#032f3c" />
-      </Head>
-      <Component {...pageProps} />
+      <InactivityWrapper>
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Merriweather&family=Poppins:wght@600&display=swap"
+            rel="stylesheet"
+          />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+          <meta name="theme-color" content="#032f3c" />
+        </Head>
+        <Component {...pageProps} />
+      </InactivityWrapper>
     </AuthProvider>
   );
 }
