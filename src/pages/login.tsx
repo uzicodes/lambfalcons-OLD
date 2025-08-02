@@ -170,6 +170,12 @@ const Login = () => {
   const [isHomeButtonHovered, setIsHomeButtonHovered] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showError, setShowError] = useState(false);
+  const [showRegisterButton, setShowRegisterButton] = useState(false);
+
+  const handleRegister = () => {
+    setShowError(false);
+    router.push('/register');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -188,17 +194,26 @@ const Login = () => {
       const errorCode = (error as any).code || '';
       if (errorCode) {
         if (errorCode === 'auth/invalid-credential') {
+          // For security, Firebase doesn't distinguish between wrong password and non-existent email
+          // We'll show a general message that covers both cases
           userFriendlyMessage = 'Invalid email or password. Please check your credentials and try again.';
+          // Show register button for invalid credential errors to help users who might not have an account
+          setShowRegisterButton(true);
         } else if (errorCode === 'auth/user-not-found') {
           userFriendlyMessage = 'No account found with this email address. Please check your email or register a new account.';
+          setShowRegisterButton(true);
         } else if (errorCode === 'auth/wrong-password') {
           userFriendlyMessage = 'Incorrect password. Please check your password and try again.';
+          setShowRegisterButton(false);
         } else if (errorCode === 'auth/invalid-email') {
           userFriendlyMessage = 'Please enter a valid email address.';
+          setShowRegisterButton(false);
         } else if (errorCode === 'auth/too-many-requests') {
           userFriendlyMessage = 'Too many failed attempts. Please wait a moment before trying again.';
+          setShowRegisterButton(false);
         } else if (errorCode === 'auth/user-disabled') {
           userFriendlyMessage = 'This account has been disabled. Please contact support.';
+          setShowRegisterButton(false);
         }
       } else if (error.message) {
         // Fallback to checking message content for older error formats
@@ -327,6 +342,8 @@ const Login = () => {
         message={errorMessage}
         onClose={() => setShowError(false)}
         type="error"
+        showRegisterButton={showRegisterButton}
+        onRegister={handleRegister}
       />
     </div>
   );

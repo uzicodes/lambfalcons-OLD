@@ -6,13 +6,17 @@ interface ErrorPopupProps {
   message: string;
   onClose: () => void;
   type?: 'error' | 'warning' | 'info';
+  showRegisterButton?: boolean;
+  onRegister?: () => void;
 }
 
 const ErrorPopup: React.FC<ErrorPopupProps> = ({
   isVisible,
   message,
   onClose,
-  type = 'error'
+  type = 'error',
+  showRegisterButton = false,
+  onRegister
 }) => {
   useEffect(() => {
     if (isVisible) {
@@ -112,30 +116,61 @@ const ErrorPopup: React.FC<ErrorPopupProps> = ({
           </div>
         </div>
 
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '4px',
-            borderRadius: '4px',
-            color: typeStyles.iconColor,
-            opacity: 0.7,
-            transition: 'opacity 0.2s ease',
-            flexShrink: 0,
-            marginTop: '2px',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = '1';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = '0.7';
-          }}
-        >
-          <X size={16} />
-        </button>
+        {/* Action Buttons */}
+        <div style={{
+          display: 'flex',
+          gap: '8px',
+          alignItems: 'center',
+        }}>
+          {showRegisterButton && onRegister && (
+            <button
+              onClick={onRegister}
+              style={{
+                backgroundColor: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s',
+                fontSize: '12px',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#2563eb';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#3b82f6';
+              }}
+            >
+              Register
+            </button>
+          )}
+          
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '4px',
+              borderRadius: '4px',
+              color: typeStyles.iconColor,
+              opacity: 0.7,
+              transition: 'opacity 0.2s ease',
+              flexShrink: 0,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '1';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '0.7';
+            }}
+          >
+            <X size={16} />
+          </button>
+        </div>
       </div>
 
       <style jsx>{`
