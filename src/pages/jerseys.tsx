@@ -264,7 +264,7 @@ const Jerseys = () => {
 
   const handleOrder = (productId: number) => {
     // Order logic would go here
-    console.log(`Ordering product ${productId} with size ${selectedSizes[productId] || 'not selected'}`);
+    // TODO: Implement order functionality
   };
 
   return (

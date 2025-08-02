@@ -30,7 +30,7 @@ export default async function handler(
     const userData = await registerUser(email, password, firstName, lastName, contactNumber);
     
     // TODO: Add Firebase Email Extension for welcome emails
-    console.log(`Welcome email would be sent to: ${email}`);
+    // Welcome email would be sent to: ${email}
 
     res.status(201).json({ 
       success: true,
