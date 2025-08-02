@@ -359,7 +359,16 @@ const Profile = () => {
     role: "User",
     avatar: ""
   });
-  const [editedProfile, setEditedProfile] = useState<UserProfile | null>(null);
+  const [editedProfile, setEditedProfile] = useState<UserProfile>({
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
+    phone: "+1 234-567-8900",
+    location: "",
+    joinDate: "Jan 2024",
+    role: "User",
+    avatar: ""
+  });
 
   useEffect(() => {
     // Check if user is authenticated
@@ -370,8 +379,6 @@ const Profile = () => {
 
     // If user is authenticated and we have user data, update the profile
     if (user && userData) {
-      console.log('UserData createdAt:', userData.createdAt, typeof userData.createdAt);
-      
       const profile: UserProfile = {
         firstName: userData.firstName,
         lastName: userData.lastName,
@@ -432,17 +439,29 @@ const Profile = () => {
 
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!editedProfile) return;
     
     try {
       // Update location in database if it has changed and is not empty
       if (editedProfile.location !== userProfile.location && editedProfile.location.trim() !== '') {
         await updateLocation(editedProfile.location);
+        
+        // Update local state to reflect the change
+        setUserProfile(prev => ({
+          ...prev,
+          location: editedProfile.location
+        }));
       }
       
-      // Update local state
-      setUserProfile(editedProfile);
+      // Update phone number if changed (this is just local state for now)
+      if (editedProfile.phone !== userProfile.phone) {
+        setUserProfile(prev => ({
+          ...prev,
+          phone: editedProfile.phone
+        }));
+      }
+      
       setActiveMenuItem('profile');
+      alert('Profile updated successfully!');
     } catch (error) {
       console.error('Failed to update profile:', error);
       alert('Failed to update profile. Please try again.');
@@ -597,8 +616,8 @@ const Profile = () => {
                   <label style={styles.formLabel}>Phone Number</label>
                   <input
                     type="tel"
-                    value={editedProfile?.phone || userProfile.phone}
-                    onChange={(e) => setEditedProfile(prev => prev ? { ...prev, phone: e.target.value } : null)}
+                    value={editedProfile.phone}
+                    onChange={(e) => setEditedProfile(prev => ({ ...prev, phone: e.target.value }))}
                     style={styles.formInput}
                     required
                   />
@@ -608,8 +627,8 @@ const Profile = () => {
                   <label style={styles.formLabel}>Location</label>
                   <input
                     type="text"
-                    value={editedProfile?.location || userProfile.location}
-                    onChange={(e) => setEditedProfile(prev => prev ? { ...prev, location: e.target.value } : null)}
+                    value={editedProfile.location}
+                    onChange={(e) => setEditedProfile(prev => ({ ...prev, location: e.target.value }))}
                     style={styles.formInput}
                     placeholder="Enter your location"
                   />
