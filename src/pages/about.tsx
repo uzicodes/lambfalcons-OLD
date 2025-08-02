@@ -164,6 +164,42 @@ const styles: { [key: string]: CSSProperties } = {
     color: "#ffffff",
     fontWeight: 500,
   },
+  gallerySection: {
+    marginTop: '80px',
+    textAlign: 'center',
+  },
+  galleryTitle: {
+    fontSize: '32px',
+    fontWeight: 'bold',
+    marginBottom: '40px',
+    color: '#e9a090',
+    fontFamily: "'Cinzel', serif",
+  },
+  galleryGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '20px',
+    maxWidth: '1200px',
+    margin: '0 auto',
+  },
+  galleryImageWrapper: {
+    position: 'relative',
+    overflow: 'hidden',
+    borderRadius: '12px',
+    border: '1px solid rgba(255,255,255,0.1)',
+    cursor: 'pointer',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  },
+  galleryImageWrapperHover: {
+    transform: 'scale(1.03)',
+    boxShadow: '0 8px 15px rgba(0,0,0,0.3)',
+  },
+  galleryImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    display: 'block',
+  },
 };
 
 const About = () => {
@@ -262,6 +298,55 @@ const About = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+          </div>
+        </div>
+
+        {/* Team Photo Gallery */}
+        <div style={styles.gallerySection}>
+          <h2 style={styles.galleryTitle}>Our Team</h2>
+          <div style={styles.galleryGrid}>
+            <div style={styles.galleryImageWrapper}>
+              <img 
+                src="/team1.jpg" 
+                alt="Team Member 1" 
+                style={styles.galleryImg}
+              />
+            </div>
+            <div style={styles.galleryImageWrapper}>
+              <img 
+                src="/team2.jpg" 
+                alt="Team Member 2" 
+                style={styles.galleryImg}
+              />
+            </div>
+            <div style={styles.galleryImageWrapper}>
+              <img 
+                src="/team3.jpg" 
+                alt="Team Member 3" 
+                style={styles.galleryImg}
+              />
+            </div>
+            <div style={styles.galleryImageWrapper}>
+              <img 
+                src="/team4.jpg" 
+                alt="Team Member 4" 
+                style={styles.galleryImg}
+              />
+            </div>
+            <div style={styles.galleryImageWrapper}>
+              <img 
+                src="/team5.jpg" 
+                alt="Team Member 5" 
+                style={styles.galleryImg}
+              />
+            </div>
+            <div style={styles.galleryImageWrapper}>
+              <img 
+                src="/team6.jpg" 
+                alt="Team Member 6" 
+                style={styles.galleryImg}
+              />
+            </div>
           </div>
         </div>
       </div>
