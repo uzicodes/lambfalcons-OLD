@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { loginUser } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import { RiHome5Line } from "react-icons/ri";
+import ErrorPopup from '../components/ErrorPopup';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -167,6 +168,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isHomeButtonHovered, setIsHomeButtonHovered] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,8 +181,44 @@ const Login = () => {
       // After successful login, redirect to profile
       router.push('/profile');
     } catch (error: any) {
-      console.error('Login failed:', error);
-      alert(error.message || 'Login failed!');
+      // Parse Firebase error messages and show user-friendly messages
+      let userFriendlyMessage = 'Login failed. Please try again.';
+      
+      // Check for error code first (Firebase error codes)
+      const errorCode = (error as any).code || '';
+      if (errorCode) {
+        if (errorCode === 'auth/invalid-credential') {
+          userFriendlyMessage = 'Invalid email or password. Please check your credentials and try again.';
+        } else if (errorCode === 'auth/user-not-found') {
+          userFriendlyMessage = 'No account found with this email address. Please check your email or register a new account.';
+        } else if (errorCode === 'auth/wrong-password') {
+          userFriendlyMessage = 'Incorrect password. Please check your password and try again.';
+        } else if (errorCode === 'auth/invalid-email') {
+          userFriendlyMessage = 'Please enter a valid email address.';
+        } else if (errorCode === 'auth/too-many-requests') {
+          userFriendlyMessage = 'Too many failed attempts. Please wait a moment before trying again.';
+        } else if (errorCode === 'auth/user-disabled') {
+          userFriendlyMessage = 'This account has been disabled. Please contact support.';
+        }
+      } else if (error.message) {
+        // Fallback to checking message content for older error formats
+        if (error.message.includes('auth/invalid-credential')) {
+          userFriendlyMessage = 'Invalid email or password. Please check your credentials and try again.';
+        } else if (error.message.includes('auth/user-not-found')) {
+          userFriendlyMessage = 'No account found with this email address. Please check your email or register a new account.';
+        } else if (error.message.includes('auth/wrong-password')) {
+          userFriendlyMessage = 'Incorrect password. Please check your password and try again.';
+        } else if (error.message.includes('auth/invalid-email')) {
+          userFriendlyMessage = 'Please enter a valid email address.';
+        } else if (error.message.includes('auth/too-many-requests')) {
+          userFriendlyMessage = 'Too many failed attempts. Please wait a moment before trying again.';
+        } else if (error.message.includes('auth/user-disabled')) {
+          userFriendlyMessage = 'This account has been disabled. Please contact support.';
+        }
+      }
+      
+      setErrorMessage(userFriendlyMessage);
+      setShowError(true);
     }
   };
 
@@ -281,6 +320,14 @@ const Login = () => {
           <RiHome5Line />
         </div>
       </div>
+      
+      {/* Error Popup */}
+      <ErrorPopup
+        isVisible={showError}
+        message={errorMessage}
+        onClose={() => setShowError(false)}
+        type="error"
+      />
     </div>
   );
 };

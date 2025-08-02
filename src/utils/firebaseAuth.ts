@@ -60,7 +60,10 @@ export const loginUser = async (email: string, password: string): Promise<Fireba
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
   } catch (error: any) {
-    throw new Error(error.message);
+    // Preserve the original Firebase error code and message
+    const firebaseError = new Error(error.message);
+    (firebaseError as any).code = error.code;
+    throw firebaseError;
   }
 };
 
