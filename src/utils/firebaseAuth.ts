@@ -81,9 +81,22 @@ export const getCurrentUserData = async (uid: string): Promise<UserData | null> 
   try {
     const userDoc = await getDoc(doc(db, 'users', uid));
     if (userDoc.exists()) {
+      const data = userDoc.data();
+      
+      // Convert Firestore timestamp to JavaScript Date if needed
+      let createdAt = data.createdAt;
+      if (createdAt && typeof createdAt.toDate === 'function') {
+        // This is a Firestore timestamp
+        createdAt = createdAt.toDate();
+      } else if (createdAt && typeof createdAt === 'object' && createdAt.seconds) {
+        // This is a Firestore timestamp object
+        createdAt = new Date(createdAt.seconds * 1000);
+      }
+      
       return {
         id: uid,
-        ...userDoc.data(),
+        ...data,
+        createdAt: createdAt,
       } as UserData;
     }
     return null;

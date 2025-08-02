@@ -370,13 +370,19 @@ const Profile = () => {
 
     // If user is authenticated and we have user data, update the profile
     if (user && userData) {
+      console.log('UserData createdAt:', userData.createdAt, typeof userData.createdAt);
+      
       const profile: UserProfile = {
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,
         phone: userData.contactNumber,
         location: userData.location || 'Not Set',
-        joinDate: userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Jan 2024',
+        joinDate: userData.createdAt ? 
+          (userData.createdAt instanceof Date ? 
+            userData.createdAt.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) :
+            new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+          ) : 'Jan 2024',
         role: "User",
         avatar: userData.profilePicture || "/dummy_pic.jpg"
       };
