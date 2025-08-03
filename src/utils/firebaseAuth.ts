@@ -5,7 +5,9 @@ import {
   onAuthStateChanged,
   User as FirebaseUser,
   UserCredential,
-  deleteUser
+  deleteUser,
+  sendPasswordResetEmail,
+  sendEmailVerification
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from './firebase';
@@ -44,6 +46,14 @@ export const registerUser = async (
     };
 
     await setDoc(doc(db, 'users', user.uid), userData);
+
+    // Send email verification to new user
+    try {
+      await sendVerificationEmail(user);
+    } catch (emailError) {
+      // Don't fail registration if email verification fails
+      console.warn('Failed to send verification email:', emailError);
+    }
 
     return {
       id: user.uid,
@@ -167,6 +177,30 @@ export const deleteUserAccount = async (): Promise<void> => {
 
     // Delete user from Firebase Auth
     await deleteUser(currentUser);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+// Send password reset email
+export const sendPasswordReset = async (email: string): Promise<void> => {
+  try {
+    await sendPasswordResetEmail(auth, email, {
+      url: window.location.origin + '/login', // Redirect back to login after reset
+      handleCodeInApp: false
+    });
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+// Send email verification to new user
+export const sendVerificationEmail = async (user: FirebaseUser): Promise<void> => {
+  try {
+    await sendEmailVerification(user, {
+      url: window.location.origin + '/profile', // Redirect to profile after verification
+      handleCodeInApp: false
+    });
   } catch (error: any) {
     throw new Error(error.message);
   }

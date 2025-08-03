@@ -243,6 +243,14 @@ const Register = () => {
         formData.phoneNumber
       );
 
+      // Show success message with email verification info
+      alert(
+        `Account created successfully! 🎉\n\n` +
+        `A verification email has been sent to ${formData.email}.\n\n` +
+        `Please check your inbox and click the verification link to activate your account.\n\n` +
+        `You can now log in to your account.`
+      );
+
       // On successful registration, redirect to the login page
       router.push('/login');
 

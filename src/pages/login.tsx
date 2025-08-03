@@ -1,6 +1,6 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
-import { loginUser } from '../utils/firebaseAuth';
+import { loginUser, sendPasswordReset } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import { RiHome5Line } from "react-icons/ri";
 import ErrorPopup from '../components/ErrorPopup';
@@ -171,10 +171,48 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showError, setShowError] = useState(false);
   const [showRegisterButton, setShowRegisterButton] = useState(false);
+  const [isResetLoading, setIsResetLoading] = useState(false);
+  const [messageType, setMessageType] = useState<'error' | 'warning' | 'info'>('error');
 
   const handleRegister = () => {
     setShowError(false);
     router.push('/register');
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email.trim()) {
+      setErrorMessage('Please enter your email address first, then click "Forgot Password?"');
+      setMessageType('warning');
+      setShowError(true);
+      setShowRegisterButton(false);
+      return;
+    }
+
+    setIsResetLoading(true);
+    try {
+      await sendPasswordReset(email);
+      setErrorMessage(`Password reset email sent to ${email}. Please check your inbox and follow the instructions to reset your password.`);
+      setMessageType('info');
+      setShowError(true);
+      setShowRegisterButton(false);
+    } catch (error: any) {
+      let errorMsg = 'Failed to send password reset email. Please try again.';
+      
+      if (error.message.includes('auth/user-not-found')) {
+        errorMsg = 'No account found with this email address. Please check your email or register a new account.';
+        setShowRegisterButton(true);
+      } else if (error.message.includes('auth/invalid-email')) {
+        errorMsg = 'Please enter a valid email address.';
+      } else if (error.message.includes('auth/too-many-requests')) {
+        errorMsg = 'Too many password reset attempts. Please wait a moment before trying again.';
+      }
+      
+      setErrorMessage(errorMsg);
+      setMessageType('error');
+      setShowError(true);
+    } finally {
+      setIsResetLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -233,6 +271,7 @@ const Login = () => {
       }
       
       setErrorMessage(userFriendlyMessage);
+      setMessageType('error');
       setShowError(true);
     }
   };
@@ -311,8 +350,19 @@ const Login = () => {
         </form>
         
         <div style={styles.forgotPassword}>
-          <a href="#" style={styles.forgotPasswordLink}>
-            Forgot Password?
+          <a 
+            href="#" 
+            style={{
+              ...styles.forgotPasswordLink,
+              opacity: isResetLoading ? 0.6 : 1,
+              pointerEvents: isResetLoading ? 'none' : 'auto'
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              handleForgotPassword();
+            }}
+          >
+            {isResetLoading ? 'Sending...' : 'Forgot Password?'}
           </a>
         </div>
         
@@ -336,12 +386,12 @@ const Login = () => {
         </div>
       </div>
       
-      {/* Error Popup */}
+      {/* Error/Success Popup */}
       <ErrorPopup
         isVisible={showError}
         message={errorMessage}
         onClose={() => setShowError(false)}
-        type="error"
+        type={messageType}
         showRegisterButton={showRegisterButton}
         onRegister={handleRegister}
       />
