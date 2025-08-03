@@ -165,7 +165,7 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
           onClick={() => window.open('tel:+1234567890', '_self')}
           >
             <div style={{
-              backgroundColor: '#f0846d',
+              backgroundColor: '#3b82f6',
               borderRadius: '50%',
               padding: '10px',
               marginRight: '15px'
