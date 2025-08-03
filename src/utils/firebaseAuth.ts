@@ -144,6 +144,16 @@ export const updateUserLocation = async (uid: string, location: string): Promise
   }
 };
 
+// Update user phone number
+export const updateUserPhoneNumber = async (uid: string, contactNumber: string): Promise<void> => {
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, { contactNumber }, { merge: true });
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 // Delete user account
 export const deleteUserAccount = async (): Promise<void> => {
   try {

@@ -341,7 +341,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 const Profile = () => {
   const router = useRouter();
-  const { user, userData, loading, profilePictureTimestamp, logout, updateProfilePicture, updateLocation } = useAuth();
+  const { user, userData, loading, profilePictureTimestamp, logout, updateProfilePicture, updateLocation, updatePhoneNumber } = useAuth();
   const [activeMenuItem, setActiveMenuItem] = useState('profile');
   const [isHovered, setIsHovered] = useState<string | null>(null);
   const [isSaveHovered, setIsSaveHovered] = useState(false);
@@ -349,6 +349,7 @@ const Profile = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [isLogoutHovered, setIsLogoutHovered] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [userProfile, setUserProfile] = useState<UserProfile>({
     firstName: "John",
     lastName: "Doe",
@@ -398,6 +399,11 @@ const Profile = () => {
     }
   }, [user, userData, loading, router]);
 
+  // Check if a field has been changed
+  const isFieldChanged = (field: keyof UserProfile): boolean => {
+    return editedProfile[field] !== userProfile[field];
+  };
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -440,10 +446,19 @@ const Profile = () => {
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (isUpdating) return; // Prevent multiple submissions
+    
+    setIsUpdating(true);
+    
     try {
+      let hasUpdates = false;
+      let successMessages: string[] = [];
+      
       // Update location in database if it has changed and is not empty
       if (editedProfile.location !== userProfile.location && editedProfile.location.trim() !== '') {
         await updateLocation(editedProfile.location);
+        hasUpdates = true;
+        successMessages.push('Location updated');
         
         // Update local state to reflect the change
         setUserProfile(prev => ({
@@ -452,19 +467,30 @@ const Profile = () => {
         }));
       }
       
-      // Update phone number if changed (this is just local state for now)
-      if (editedProfile.phone !== userProfile.phone) {
+      // Update phone number in database if it has changed and is not empty
+      if (editedProfile.phone !== userProfile.phone && editedProfile.phone.trim() !== '') {
+        await updatePhoneNumber(editedProfile.phone);
+        hasUpdates = true;
+        successMessages.push('Phone number updated');
+        
+        // Update local state to reflect the change
         setUserProfile(prev => ({
           ...prev,
           phone: editedProfile.phone
         }));
       }
       
-      setActiveMenuItem('profile');
-      alert('Profile updated successfully!');
+      if (hasUpdates) {
+        setActiveMenuItem('profile');
+        alert(`Profile updated successfully!\n${successMessages.join('\n')}`);
+      } else {
+        alert('No changes detected. Please modify at least one field before saving.');
+      }
     } catch (error) {
       console.error('Failed to update profile:', error);
-      alert('Failed to update profile. Please try again.');
+      alert('Failed to update profile. Please check your internet connection and try again.');
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -613,37 +639,94 @@ const Profile = () => {
                 </div>
 
                 <div style={styles.formGroup}>
-                  <label style={styles.formLabel}>Phone Number</label>
+                  <label style={styles.formLabel}>
+                    Phone Number
+                    {isFieldChanged('phone') && (
+                      <span style={{
+                        marginLeft: '8px',
+                        fontSize: '12px',
+                        color: '#f0846d',
+                        fontWeight: 'normal'
+                      }}>
+                        • Modified
+                      </span>
+                    )}
+                  </label>
                   <input
                     type="tel"
                     value={editedProfile.phone}
                     onChange={(e) => setEditedProfile(prev => ({ ...prev, phone: e.target.value }))}
-                    style={styles.formInput}
+                    style={{
+                      ...styles.formInput,
+                      ...(isFieldChanged('phone') ? {
+                        borderColor: '#f0846d',
+                        boxShadow: '0 0 0 1px rgba(240,132,109,0.3)'
+                      } : {})
+                    }}
+                    placeholder="Enter your phone number (e.g., +1 234-567-8900)"
                     required
                   />
+                  <div style={{
+                    fontSize: '12px',
+                    color: 'rgba(255,255,255,0.6)',
+                    marginTop: '5px'
+                  }}>
+                    Include your country code for better accessibility
+                  </div>
                 </div>
 
                 <div style={styles.formGroup}>
-                  <label style={styles.formLabel}>Location</label>
+                  <label style={styles.formLabel}>
+                    Location
+                    {isFieldChanged('location') && (
+                      <span style={{
+                        marginLeft: '8px',
+                        fontSize: '12px',
+                        color: '#f0846d',
+                        fontWeight: 'normal'
+                      }}>
+                        • Modified
+                      </span>
+                    )}
+                  </label>
                   <input
                     type="text"
                     value={editedProfile.location}
                     onChange={(e) => setEditedProfile(prev => ({ ...prev, location: e.target.value }))}
-                    style={styles.formInput}
-                    placeholder="Enter your location"
+                    style={{
+                      ...styles.formInput,
+                      ...(isFieldChanged('location') ? {
+                        borderColor: '#f0846d',
+                        boxShadow: '0 0 0 1px rgba(240,132,109,0.3)'
+                      } : {})
+                    }}
+                    placeholder="Enter your location (e.g., New York, NY)"
                   />
+                  <div style={{
+                    fontSize: '12px',
+                    color: 'rgba(255,255,255,0.6)',
+                    marginTop: '5px'
+                  }}>
+                    This helps other members know where you're located
+                  </div>
                 </div>
 
                 <button
                   type="submit"
+                  disabled={isUpdating}
                   style={{
                     ...styles.saveButton,
-                    ...(isSaveHovered ? styles.saveButtonHover : {})
+                    ...(isSaveHovered ? styles.saveButtonHover : {}),
+                    ...(isUpdating ? { 
+                      opacity: 0.7, 
+                      cursor: 'not-allowed',
+                      transform: 'none'
+                    } : {})
                   }}
-                  onMouseEnter={() => setIsSaveHovered(true)}
+                  onMouseEnter={() => !isUpdating && setIsSaveHovered(true)}
                   onMouseLeave={() => setIsSaveHovered(false)}
                 >
-                  Save Changes
+                  {isUpdating ? 'Saving...' : 'Save Changes'}
                 </button>
               </form>
             </>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
-import { getCurrentUserData, logoutUser, updateUserProfile, updateUserProfilePicture, updateUserLocation, onAuthStateChange } from '../utils/firebaseAuth';
+import { getCurrentUserData, logoutUser, updateUserProfile, updateUserProfilePicture, updateUserLocation, updateUserPhoneNumber, onAuthStateChange } from '../utils/firebaseAuth';
 import { compressImageForFirestore, convertImageToBase64 } from '../utils/imageUpload';
 import { UserData } from '../utils/firebaseAuth';
 
@@ -12,6 +12,7 @@ interface AuthContextType {
   updateProfile: (updates: Partial<Omit<UserData, 'id' | 'email' | 'createdAt'>>) => Promise<void>;
   updateProfilePicture: (file: File) => Promise<void>;
   updateLocation: (location: string) => Promise<void>;
+  updatePhoneNumber: (phoneNumber: string) => Promise<void>;
   profilePictureTimestamp: number;
 }
 
@@ -92,6 +93,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const updatePhoneNumber = async (phoneNumber: string) => {
+    if (!user) throw new Error('No user is currently signed in');
+    
+    try {
+      await updateUserPhoneNumber(user.uid, phoneNumber);
+      const updatedData = await getCurrentUserData(user.uid);
+      setUserData(updatedData);
+    } catch (error) {
+      console.error('Update phone number error:', error);
+      throw error;
+    }
+  };
+
   const value = {
     user,
     userData,
@@ -100,6 +114,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     updateProfile,
     updateProfilePicture,
     updateLocation,
+    updatePhoneNumber,
     profilePictureTimestamp
   };
 
