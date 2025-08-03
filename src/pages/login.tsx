@@ -198,13 +198,28 @@ const Login = () => {
     } catch (error: any) {
       let errorMsg = 'Failed to send password reset email. Please try again.';
       
-      if (error.message.includes('auth/user-not-found')) {
+      // Check for specific Firebase error codes
+      const errorCode = error.code || '';
+      
+      if (errorCode === 'auth/user-not-found') {
+        errorMsg = 'No account found with this email address. Please check your email or register a new account.';
+        setShowRegisterButton(true);
+      } else if (errorCode === 'auth/invalid-email') {
+        errorMsg = 'Please enter a valid email address.';
+        setShowRegisterButton(false);
+      } else if (errorCode === 'auth/too-many-requests') {
+        errorMsg = 'Too many password reset attempts. Please wait a moment before trying again.';
+        setShowRegisterButton(false);
+      } else if (error.message.includes('auth/user-not-found')) {
+        // Fallback to message checking
         errorMsg = 'No account found with this email address. Please check your email or register a new account.';
         setShowRegisterButton(true);
       } else if (error.message.includes('auth/invalid-email')) {
         errorMsg = 'Please enter a valid email address.';
+        setShowRegisterButton(false);
       } else if (error.message.includes('auth/too-many-requests')) {
         errorMsg = 'Too many password reset attempts. Please wait a moment before trying again.';
+        setShowRegisterButton(false);
       }
       
       setErrorMessage(errorMsg);

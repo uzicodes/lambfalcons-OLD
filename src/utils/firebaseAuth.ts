@@ -190,7 +190,8 @@ export const sendPasswordReset = async (email: string): Promise<void> => {
       handleCodeInApp: false
     });
   } catch (error: any) {
-    throw new Error(error.message);
+    // Re-throw the original Firebase error to preserve error codes
+    throw error;
   }
 };
 
