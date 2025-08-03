@@ -191,7 +191,7 @@ const Login = () => {
     setIsResetLoading(true);
     try {
       await sendPasswordReset(email);
-      setErrorMessage(`Password reset email sent to ${email}. Please check your inbox and follow the instructions to reset your password.`);
+      setErrorMessage(`Password reset email sent to ${email}.\n\nPlease check your inbox and follow the instructions to reset your password.\n\n📧 Don't see the email? Check your spam/junk folder - it might have landed there!`);
       setMessageType('info');
       setShowError(true);
       setShowRegisterButton(false);

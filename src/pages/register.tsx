@@ -248,6 +248,7 @@ const Register = () => {
         `Account created successfully! 🎉\n\n` +
         `A verification email has been sent to ${formData.email}.\n\n` +
         `Please check your inbox and click the verification link to activate your account.\n\n` +
+        `📧 Don't see the email? Check your spam/junk folder - it might have landed there!\n\n` +
         `You can now log in to your account.`
       );
 
