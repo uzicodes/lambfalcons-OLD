@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { SiGooglehome } from "react-icons/si";
 import { useAuth } from '../contexts/AuthContext';
 import { getImageUrl } from '../utils/imageUpload';
+import OrderPopup from '../components/OrderPopup';
 
 // Product data (dummy data)
 const jerseyProducts = [
@@ -254,6 +255,8 @@ const Jerseys = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{[key: number]: string}>({});
+  const [showOrderPopup, setShowOrderPopup] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<string>('');
 
   const handleSizeSelect = (productId: number, size: string) => {
     setSelectedSizes(prev => ({
@@ -263,8 +266,11 @@ const Jerseys = () => {
   };
 
   const handleOrder = (productId: number) => {
-    // Order logic would go here
-    // TODO: Implement order functionality
+    const product = jerseyProducts.find(p => p.id === productId);
+    if (product) {
+      setSelectedProduct(product.name);
+      setShowOrderPopup(true);
+    }
   };
 
   return (
@@ -449,6 +455,13 @@ const Jerseys = () => {
           </div>
         </div>
       </div>
+
+      {/* Order Popup */}
+      <OrderPopup
+        isVisible={showOrderPopup}
+        onClose={() => setShowOrderPopup(false)}
+        productName={selectedProduct}
+      />
     </div>
   );
 };
