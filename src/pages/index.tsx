@@ -2,7 +2,7 @@ import React, { useState, useEffect, CSSProperties } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "next/router";
 import { getImageUrl } from '../utils/imageUpload';
-import { SiTelegram } from "react-icons/si";
+import { FaTelegramPlane } from "react-icons/fa";
 
 // Constants
 const heroSlides = [
@@ -773,6 +773,14 @@ const globalStyles = `
   .scrolling-text {
     animation: scrollText 20s linear infinite;
   }
+
+  .social-link1 svg {
+    transition: color 0.3s;
+    color: #fff;
+  }
+  .social-link1:hover svg {
+    color: #2EABE6;
+  }
 `;
 
 // Component
@@ -1297,7 +1305,7 @@ const Index = () => {
             {/* Social Links */}
             {/* Telegram icon with hover effect and bot link */}
             <a href="https://t.me/lambfalcons_bot" style={{...styles.socialLink, ...styles.socialLink1}} className="social-link1" target="_blank" rel="noopener noreferrer">
-              <SiTelegram size={28} style={{ verticalAlign: 'middle' }} />
+              <FaTelegramPlane size={28} style={{ verticalAlign: 'middle' }} />
             </a>
             <a href="#" style={{...styles.socialLink, ...styles.socialLink2}} className="social-link2">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
