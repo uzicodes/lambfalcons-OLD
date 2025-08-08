@@ -1295,8 +1295,8 @@ const Index = () => {
           <div style={{ ...styles.logoText, fontSize: "25px" }}>LAMB FALCONS</div>
           <div style={styles.card}>
             {/* Social Links */}
-            {/* Replace GitHub with Telegram */}
-            <a href="https://t.me/YOUR_TELEGRAM_BOT" style={{...styles.socialLink, ...styles.socialLink1}} className="social-link1" target="_blank" rel="noopener noreferrer">
+            {/* Telegram icon with hover effect and bot link */}
+            <a href="https://t.me/lambfalcons_bot" style={{...styles.socialLink, ...styles.socialLink1}} className="social-link1" target="_blank" rel="noopener noreferrer">
               <SiTelegram size={28} style={{ verticalAlign: 'middle' }} />
             </a>
             <a href="#" style={{...styles.socialLink, ...styles.socialLink2}} className="social-link2">
