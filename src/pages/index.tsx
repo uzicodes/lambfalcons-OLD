@@ -1071,7 +1071,9 @@ const Index = () => {
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <h2 style={{ ...styles.sectionTitle, color: "#e9a090" }}>Why Choose LAMB FALCONS ?</h2>
           <p style={styles.sectionSubtitle}>
-            Experience excellence in every aspect of club membership and athletic development
+            <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}>
+              Excellence in every aspect of Club membership & Athletic development
+            </span>
           </p>
 
           <div style={styles.featuresGrid}>
@@ -1099,10 +1101,12 @@ const Index = () => {
               <div style={styles.featureCardGradient} data-gradient></div>
               <div style={styles.featureCardContent}>
                 <div style={styles.featureIcon}>🏆</div>
-                <h3 style={{...styles.featureTitle, textAlign: "center"}}>Championship Legacy</h3>
+                <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Championship Legacy</h3>
                 <p style={styles.featureDescription}>
-                  Join a club with a proven track record of success and a commitment to excellence in
-                  every competition.
+                  <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}>
+                    Proven track record of success & commitment to excellence in
+                    every competition.
+                  </span>
                 </p>
               </div>
             </div>
@@ -1131,10 +1135,12 @@ const Index = () => {
               <div style={styles.featureCardGradient} data-gradient></div>
               <div style={styles.featureCardContent}>
                 <div style={styles.featureIcon}>👥</div>
-                <h3 style={{...styles.featureTitle, textAlign: "center"}}>Strong Community</h3>
+                <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Strong Community</h3>
                 <p style={styles.featureDescription}>
-                  Be part of a tight-knit community where lifelong friendships are formed & everyone
-                  supports each other.
+                  <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}>
+                    Be part of a tight-knit community where lifelong friendships are formed & everyone
+                    supports each other.
+                  </span>
                 </p>
                 <div style={{ color: "#3b82f6", fontWeight: 600, cursor: "pointer" }} onClick={() => window.location.href = '/register'}>Join Now →</div>
               </div>
@@ -1164,10 +1170,12 @@ const Index = () => {
               <div style={styles.featureCardGradient} data-gradient></div>
               <div style={styles.featureCardContent}>
                 <div style={styles.featureIcon}>⭐</div>
-                <h3 style={{...styles.featureTitle, textAlign: "center"}}>Elite Training</h3>
+                <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Elite Training</h3>
                 <p style={styles.featureDescription}>
-                  Access world-class training facilities to elevate your performance
-                  to new heights.
+                  <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}>
+                    Access world-class training facilities to elevate your performance
+                    to new heights.
+                  </span>
                 </p>
               </div>
             </div>
