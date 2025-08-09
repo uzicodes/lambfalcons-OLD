@@ -1215,7 +1215,7 @@ const Index = () => {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <h2 style={styles.ctaTitle}>Ready to Roar?</h2>
           <p style={{ fontSize: "1.15rem", marginBottom: "32px", color: "rgba(255,255,255,0.9)" }}>
-            Be part of something Extraordinary !
+            <span style={{ fontFamily: 'Lora, serif' }}>Be part of something Extraordinary !</span>
           </p>
           <button
             style={{

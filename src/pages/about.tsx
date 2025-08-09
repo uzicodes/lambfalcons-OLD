@@ -246,12 +246,12 @@ const About = () => {
         
         {/* Location Section */}
         <div style={styles.locationSection}>
-          <h2 style={styles.locationTitle}>Where to Find Us ?</h2>
+          <h2 style={{ ...styles.locationTitle, fontSize: '2.5rem' }}>Where to Find Us ?</h2>
           <p style={{...styles.locationDescription, fontFamily: "'Libertinus Sans', sans-serif"}}>
-            Visit our facility at LAMB Hospital Compund. 
+            <span style={{ fontFamily: 'Lora, serif' }}>Visit our facility at LAMB Hospital Compund.</span>
             <br>
             </br>
-            We're located here making it easily accessible for all our Members & Visitors.
+            <span style={{ fontFamily: 'Lora, serif' }}>We're located here making it easily accessible for all our Visitors.</span>
           </p>
           <div style={styles.mapContainer}>
             <div style={styles.mapOverlay} />
@@ -268,7 +268,7 @@ const About = () => {
 
       {/* Contact Section */}
       <div style={styles.contactSection}>
-        <h2 style={styles.contactTitle}>Get in Touch</h2>
+        <h2 style={{ ...styles.contactTitle, fontSize: '2.5rem' }}>Get in Touch</h2>
         <div style={styles.contactGrid}>
           <div 
             style={styles.contactCard}
