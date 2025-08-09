@@ -1101,11 +1101,12 @@ const Index = () => {
               <div style={styles.featureCardGradient} data-gradient></div>
               <div style={styles.featureCardContent}>
                 <div style={styles.featureIcon}>🏆</div>
-                <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Championship Legacy</h3>
+                <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Golden Legacy</h3>
                 <p style={styles.featureDescription}>
                   <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}>
-                    Proven track record of success & commitment to excellence in
-                    every competition.
+                    <span style={{ fontFamily: 'Lora, serif', fontWeight: 250 }}>
+                      Proven track record of success & commitment to excellence in every competition.
+                    </span>
                   </span>
                 </p>
               </div>
@@ -1138,8 +1139,9 @@ const Index = () => {
                 <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Strong Community</h3>
                 <p style={styles.featureDescription}>
                   <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}>
-                    Be part of a tight-knit community where lifelong friendships are formed & everyone
-                    supports each other.
+                    <span style={{ fontFamily: 'Lora, serif', fontWeight: 250 }}>
+                      Be part of a tight-knit community where lifelong friendships are formed & everyone supports each other.
+                    </span>
                   </span>
                 </p>
                 <div style={{ color: "#3b82f6", fontWeight: 600, cursor: "pointer" }} onClick={() => window.location.href = '/register'}>Join Now →</div>
@@ -1173,8 +1175,9 @@ const Index = () => {
                 <h3 style={{...styles.featureTitle, textAlign: "center", fontFamily: 'Cormorant Unicase, serif', fontSize: '2.2rem', lineHeight: 1.1 }}>Elite Training</h3>
                 <p style={styles.featureDescription}>
                   <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}>
-                    Access world-class training facilities to elevate your performance
-                    to new heights.
+                    <span style={{ fontFamily: 'Lora, serif', fontWeight: 250 }}>
+                      Access world-class training facilities to elevate your performance to new heights.
+                    </span>
                   </span>
                 </p>
               </div>
