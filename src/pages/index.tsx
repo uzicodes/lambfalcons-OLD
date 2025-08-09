@@ -10,17 +10,17 @@ const heroSlides = [
     image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1920&h=1080&fit=crop",
     title: "RISE AS ONE",
     subtitle: "LAMB FALCONS",
-    description: "Where champions are forged and legends are born",
+    description: "Where Champions are forged & Legends are born",
   },
   {
     image: "./heroslides1.JPG",
-    title: "WAR FOR THE BADGE",
+    title: "MORE THAN A CLUB",
     description: "",
   },
   {
     image: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=1920&h=1080&fit=crop",
-    title: "MORE THAN A CLUB",
-    description: "Building tomorrow's champions today",
+    title: "WAR FOR THE BADGE",
+    description: "Building tomorrow's Champions Today!",
   },
 ];
 
