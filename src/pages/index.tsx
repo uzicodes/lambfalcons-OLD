@@ -1268,10 +1268,10 @@ const Index = () => {
         <div style={styles.partnershipContainer}>
           <div style={styles.partnershipContent}>
             <h2 style={styles.partnershipTitle}>Official Kit Partner</h2>
-            <p style={styles.partnershipDescription}>
+            <p style={{ ...styles.partnershipDescription, fontFamily: 'Lora, serif', fontSize: '18px', fontWeight: 300 }}>
               We are proud to announce our partnership with Designex, our official kit partner! 
             </p>
-            <p style={styles.partnershipDescription}>
+            <p style={{ ...styles.partnershipDescription, fontFamily: 'Lora, serif', fontSize: '18px', fontWeight: 300 }}>
               Designex brings years of expertise in sports apparel manufacturing, ensuring our players 
               have access to the best equipment while representing our club with pride.
             </p>
