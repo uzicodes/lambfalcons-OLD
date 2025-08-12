@@ -1079,7 +1079,7 @@ const Index = () => {
           <h2 style={{ ...styles.sectionTitle, color: "#e9a090" }}>Why Choose LAMB FALCONS ?</h2>
           <p style={styles.sectionSubtitle}>
             <span style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}>
-              Excellence in every aspect of Club membership & Athletic development
+              Excellence of Club Membership & Athletic Development
             </span>
           </p>
 
