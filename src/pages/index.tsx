@@ -1041,7 +1041,8 @@ const Index = () => {
             <div 
               style={{
                 ...styles.statLabel,
-                ...(mounted && hoveredStat === index ? styles.statLabelHover : {})
+                ...(mounted && hoveredStat === index ? styles.statLabelHover : {}),
+                fontFamily: 'Lora, serif'
               }}
             >
               {stat.label}
