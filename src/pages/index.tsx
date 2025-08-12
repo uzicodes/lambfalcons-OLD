@@ -988,7 +988,13 @@ const Index = () => {
                   justifyContent: "center",
                   gap: "8px"
                 }}
-                onClick={() => window.location.href = '/register'}
+                onClick={() => {
+                  if (user) {
+                    router.push('/profile');
+                  } else {
+                    router.push('/register');
+                  }
+                }}
               >
                 Join The Club
                 <svg 
@@ -1239,7 +1245,13 @@ const Index = () => {
               target.style.backgroundColor = "white";
               target.style.transform = "scale(1)";
             }}
-            onClick={() => window.location.href = '/register'}
+            onClick={() => {
+              if (user) {
+                router.push('/profile');
+              } else {
+                router.push('/register');
+              }
+            }}
           >
             Become a Falcon Today 
           </button>
