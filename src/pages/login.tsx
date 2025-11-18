@@ -4,6 +4,7 @@ import { loginUser, sendPasswordReset } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import { RiHome5Line } from "react-icons/ri";
 import ErrorPopup from '../components/ErrorPopup';
+import Loader from '../components/Loader';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -173,6 +174,7 @@ const Login = () => {
   const [showRegisterButton, setShowRegisterButton] = useState(false);
   const [isResetLoading, setIsResetLoading] = useState(false);
   const [messageType, setMessageType] = useState<'error' | 'warning' | 'info'>('error');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = () => {
     setShowError(false);
@@ -232,6 +234,7 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     try {
       // Use Firebase Auth directly
@@ -240,6 +243,7 @@ const Login = () => {
       // After successful login, redirect to profile
       router.push('/profile');
     } catch (error: any) {
+      setIsLoading(false);
       // Parse Firebase error messages and show user-friendly messages
       let userFriendlyMessage = 'Login failed. Please try again.';
       
@@ -290,6 +294,10 @@ const Login = () => {
       setShowError(true);
     }
   };
+
+  if (isLoading) {
+    return <Loader size="60" color="#3b82f6" speed="1.75" />;
+  }
 
   return (
     <div style={styles.container}>

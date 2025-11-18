@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../contexts/AuthContext';
+import Loader from './Loader';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -28,18 +29,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   // Show loading spinner while checking authentication
   if (loading) {
-    return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: '#000000',
-        color: '#ffffff'
-      }}>
-        <div>Loading...</div>
-      </div>
-    );
+    return <Loader size="60" color="#3b82f6" speed="1.75" />;
   }
 
   // If authentication check passes, render children

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { registerUser } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import { RiHome5Line } from "react-icons/ri";
+import Loader from '../components/Loader';
 
 const styles: { [key: string]: CSSProperties } = {
   container: {
@@ -180,6 +181,7 @@ const Register = () => {
     confirmPassword: ''
   });
   const [isHomeButtonHovered, setIsHomeButtonHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (email: string) => {
     return email.includes('@') && email.includes('.');
@@ -233,6 +235,7 @@ const Register = () => {
       return;
     }
 
+    setIsLoading(true);
     try {
       // Use Firebase Auth directly
       await registerUser(
@@ -258,8 +261,13 @@ const Register = () => {
     } catch (error: any) {
       console.error('Registration failed:', error);
       alert(error.message || 'Registration failed. Please try again.');
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <Loader size="60" color="#3b82f6" speed="1.75" />;
+  }
 
   return (
     <div style={styles.container}>
