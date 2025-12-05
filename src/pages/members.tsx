@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CSSProperties } from 'react';
-import { Crown, Users, Mail, Phone, MapPin, Calendar } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { SiGooglehome } from "react-icons/si";
 import Head from 'next/head';
 import { useAuth } from '../contexts/AuthContext';
@@ -57,7 +57,7 @@ const styles: { [key: string]: CSSProperties } = {
   logoText: {
     fontSize: '25px',
     color: 'white',
-    fontFamily: "'Lilita One', cursive",
+    fontFamily: "var(--font-lilita), cursive",
   },
   navMenuGroup: {
     display: 'flex',
@@ -71,7 +71,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: 500,
     transition: 'color 0.3s ease',
     cursor: 'pointer',
-    fontFamily: "'Merriweather', serif",
+    fontFamily: "var(--font-merriweather), serif",
   },
   button: {
     backgroundColor: '#f0846d',
@@ -89,7 +89,7 @@ const styles: { [key: string]: CSSProperties } = {
     marginBottom: '80px',
     fontSize: '56px',
     fontWeight: 'bold',
-    fontFamily: "'Cinzel', serif",
+    fontFamily: "var(--font-cinzel), serif",
     color: '#7fd3ec',
     textShadow: '0 0 20px rgba(240, 132, 109, 0.3)',
   },
@@ -114,7 +114,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontSize: '36px',
     fontWeight: 'bold',
     color: '#f0846d',
-    fontFamily: "'Cinzel', serif",
+    fontFamily: "var(--font-cinzel), serif",
     textAlign: 'center',
     flexGrow: 1,
   },
@@ -176,7 +176,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: '400',
     marginBottom: '8px',
     color: '#ffffff',
-    fontFamily: "'Libre Baskerville', serif",
+    fontFamily: "var(--font-libre-baskerville), serif",
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -349,21 +349,20 @@ const Members = () => {
   return (
     <div style={styles.container}>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+        {/* Updated title to "Our Members" */}
+        <title>Our Members</title>
       </Head>
+      
       {/* Navbar */}
       <div style={styles.navbar}>
         <div style={styles.navContent}>
-          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={styles.logoGroup}>
-              <div>
-                <img 
-                  src="/falcons_logo.png" 
-                  alt="LAMB FALCONS Logo" 
-                  style={{ width: '65px', height: '65px', objectFit: 'contain' }} 
-                />
-              </div>
+              <img 
+                src="/falcons_logo.png" 
+                alt="LAMB FALCONS Logo" 
+                style={{ width: '65px', height: '65px', objectFit: 'contain' }} 
+              />
               <div style={styles.logoText}>LAMB FALCONS</div>
             </div>
           </a>
