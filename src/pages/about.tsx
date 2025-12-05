@@ -173,8 +173,9 @@ const About = () => {
   return (
     <div style={styles.container}>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+        <title>About Us</title>
       </Head>
+      
       {/* Navbar */}
       <div style={styles.navbar}>
         <div style={styles.navContent}>
@@ -249,10 +250,9 @@ const About = () => {
         {/* Location Section */}
         <div style={styles.locationSection}>
           <h2 style={{ ...styles.locationTitle, fontSize: '2.5rem' }}>Where to Find Us ?</h2>
-          <p style={{...styles.locationDescription, fontFamily: "'Libertinus Sans', sans-serif"}}>
+          <p style={{...styles.locationDescription, fontFamily: "var(--font-libertinus), sans-serif"}}>
             <span style={{ fontFamily: 'Lora, serif' }}>Visit our facility at LAMB Hospital Compund.</span>
-            <br>
-            </br>
+            <br />
             <span style={{ fontFamily: 'Lora, serif' }}>We're located here making it easily accessible for all our Visitors.</span>
           </p>
           <div style={styles.mapContainer}>
@@ -288,8 +288,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>📍</div>
-            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Address</div>
-            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>LAMB Hospital, Parbatipur, Dinajpur</div>
+            <div style={{...styles.contactLabel, fontFamily: "var(--font-libertinus), sans-serif"}}>Address</div>
+            <div style={{...styles.contactValue, fontFamily: "var(--font-libertinus), sans-serif"}}>LAMB Hospital, Parbatipur, Dinajpur</div>
           </div>
 
           <div 
@@ -308,8 +308,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>📞</div>
-            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Phone</div>
-            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>+880 1762-791500</div>
+            <div style={{...styles.contactLabel, fontFamily: "var(--font-libertinus), sans-serif"}}>Phone</div>
+            <div style={{...styles.contactValue, fontFamily: "var(--font-libertinus), sans-serif"}}>+880 1762-791500</div>
           </div>
 
           <div 
@@ -328,8 +328,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>✉️</div>
-            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Email</div>
-            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>utshozi11@gmail.com</div>
+            <div style={{...styles.contactLabel, fontFamily: "var(--font-libertinus), sans-serif"}}>Email</div>
+            <div style={{...styles.contactValue, fontFamily: "var(--font-libertinus), sans-serif"}}>utshozi11@gmail.com</div>
           </div>
 
           <div 
@@ -348,8 +348,8 @@ const About = () => {
             }}
           >
             <div style={styles.contactIcon}>⏰</div>
-            <div style={{...styles.contactLabel, fontFamily: "'Libertinus Sans', sans-serif"}}>Hours</div>
-            <div style={{...styles.contactValue, fontFamily: "'Libertinus Sans', sans-serif"}}>Sun - Sat: 10AM - 12AM</div>
+            <div style={{...styles.contactLabel, fontFamily: "var(--font-libertinus), sans-serif"}}>Hours</div>
+            <div style={{...styles.contactValue, fontFamily: "var(--font-libertinus), sans-serif"}}>Sun - Sat: 10AM - 12AM</div>
           </div>
         </div>
       </div>
@@ -357,4 +357,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;
