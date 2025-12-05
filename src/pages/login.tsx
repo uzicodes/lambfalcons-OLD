@@ -1,5 +1,6 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head'; // Imported Head
 import { loginUser, sendPasswordReset } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import { RiHome5Line } from "react-icons/ri";
@@ -301,6 +302,11 @@ const Login = () => {
 
   return (
     <div style={styles.container}>
+      {/* Added Head with Title */}
+      <Head>
+        <title>Login</title>
+      </Head>
+
       <img 
         src="/login.jpg" 
         alt="Background" 
@@ -422,4 +428,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;
