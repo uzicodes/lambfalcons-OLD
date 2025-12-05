@@ -118,7 +118,7 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: 'rgba(255,255,255,0.05)',
     borderRadius: '15px',
     overflow: 'hidden',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+    transition: 'transform 0.3s ease',
     border: '1px solid rgba(255,255,255,0.1)',
     width: 'calc(25% - 15px)', // Make each card take up exactly 25% of space minus gap
     flex: '1 1 0', // Allow cards to grow and shrink as needed
@@ -276,11 +276,9 @@ const Jerseys = () => {
   return (
     <div style={styles.container}>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <title>Our Jerseys</title>
       </Head>
+
       {/* Navbar */}
       <div style={styles.navbar}>
         <div style={styles.navContent}>
