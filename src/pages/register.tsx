@@ -1,5 +1,6 @@
 import React, { useState, CSSProperties } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head'; // Imported Head
 import { registerUser } from '../utils/firebaseAuth';
 import { Eye, EyeOff } from 'lucide-react';
 import { RiHome5Line } from "react-icons/ri";
@@ -17,7 +18,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontFamily: 'Arial, sans-serif',
     position: 'relative',
     overflow: 'hidden',
-    padding: '20px', // Added padding for smaller screens
+    padding: '20px',
   },
   backgroundImage: {
     position: 'absolute',
@@ -33,7 +34,7 @@ const styles: { [key: string]: CSSProperties } = {
   registerBox: {
     backgroundColor: 'rgba(255,255,255,0.05)',
     backdropFilter: 'blur(10px)',
-    padding: '30px', // Reduced padding from 40px
+    padding: '30px',
     borderRadius: '20px',
     width: '100%',
     maxWidth: '400px',
@@ -45,46 +46,47 @@ const styles: { [key: string]: CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '20px', // Reduced from 30px
+    marginBottom: '10px',
   },
   logoText: {
-    fontSize: '30px', // Reduced from 34px
+    fontSize: '30px',
     fontWeight: 'bold',
     color: '#d0ece7',
-    fontFamily: "'Lilita One', cursive",
+    fontFamily: "var(--font-lilita), cursive", // Updated to use CSS variable
   },
   title: {
-    fontSize: '22px', // Reduced from 24px
+    fontSize: '22px',
     fontWeight: 'bold',
     marginBottom: '20px',
     textAlign: 'center',
     color: '#ffffff',
+    marginTop: '0px',
   },
   inputGroup: {
-    marginBottom: '15px', // Reduced from 20px
+    marginBottom: '15px',
   },
   nameGroup: {
     display: 'flex',
-    gap: '10px', // Reduced from 12px
-    marginBottom: '15px', // Reduced from 20px
+    gap: '10px',
+    marginBottom: '15px',
   },
   nameInput: {
     flex: 1,
   },
   label: {
     display: 'block',
-    marginBottom: '6px', // Reduced from 8px
+    marginBottom: '6px',
     color: 'rgba(255,255,255,0.8)',
-    fontSize: '14px', // Added smaller font size
+    fontSize: '14px',
   },
   input: {
     width: '100%',
-    padding: '10px', // Reduced from 12px
+    padding: '10px',
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.1)',
     backgroundColor: 'rgba(255,255,255,0.05)',
     color: '#ffffff',
-    fontSize: '14px', // Reduced from 16px
+    fontSize: '14px',
     outline: 'none',
     transition: 'all 0.3s ease',
   },
@@ -94,7 +96,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
   button: {
     width: '100%',
-    padding: '10px', // Reduced from 12px
+    padding: '10px',
     borderRadius: '8px',
     border: 'none',
     backgroundColor: '#3b82f6',
@@ -103,7 +105,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: 'bold',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
-    marginTop: '10px', // Added margin top
+    marginTop: '10px',
   },
   buttonHover: {
     backgroundColor: '#2563eb',
@@ -116,19 +118,19 @@ const styles: { [key: string]: CSSProperties } = {
   },
   passwordInput: {
     width: '100%',
-    padding: '10px', // Reduced from 12px
-    paddingRight: '40px', // Reduced padding right
+    padding: '10px',
+    paddingRight: '40px',
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.1)',
     backgroundColor: 'rgba(255,255,255,0.05)',
     color: '#ffffff',
-    fontSize: '14px', // Reduced from 16px
+    fontSize: '14px',
     outline: 'none',
     transition: 'all 0.3s ease',
   },
   eyeIcon: {
     position: 'absolute',
-    right: '10px', // Adjusted right position
+    right: '10px',
     top: '50%',
     transform: 'translateY(-50%)',
     cursor: 'pointer',
@@ -141,9 +143,9 @@ const styles: { [key: string]: CSSProperties } = {
   },
   loginLink: {
     textAlign: 'center',
-    marginTop: '15px', // Reduced from 20px
+    marginTop: '15px',
     color: 'rgba(255,255,255,0.6)',
-    fontSize: '14px', // Smaller font size
+    fontSize: '14px',
   },
   loginLinkText: {
     color: '#3b82f6',
@@ -152,7 +154,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
   homeButton: {
     display: 'block',
-    marginTop: '15px', // Reduced from 20px
+    marginTop: '15px',
     textAlign: 'center',
     color: '#3b82f6',
     fontSize: '24px',
@@ -210,7 +212,6 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate all fields on submission
     const newErrors = {
       email: '',
       phoneNumber: '',
@@ -233,14 +234,12 @@ const Register = () => {
 
     setErrors(newErrors);
 
-    // Check if there are any errors
     if (Object.values(newErrors).some(error => error !== '')) {
       return;
     }
 
     setIsLoading(true);
     try {
-      // Use Firebase Auth directly
       await registerUser(
         formData.email,
         formData.password,
@@ -249,7 +248,6 @@ const Register = () => {
         formData.phoneNumber
       );
 
-      // Show success message with email verification info
       alert(
         `Account created successfully! 🎉\n\n` +
         `A verification email has been sent to ${formData.email}.\n\n` +
@@ -258,7 +256,6 @@ const Register = () => {
         `You can now log in to your account.`
       );
 
-      // On successful registration, redirect to the login page
       router.push('/login');
 
     } catch (error: any) {
@@ -274,6 +271,11 @@ const Register = () => {
 
   return (
     <div style={styles.container}>
+      {/* Added Head with Title */}
+      <Head>
+        <title>Register</title>
+      </Head>
+
       <img 
         src="/register.jpg" 
         alt="Background" 
