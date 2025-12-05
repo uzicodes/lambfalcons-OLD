@@ -17,6 +17,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontFamily: 'Arial, sans-serif',
     position: 'relative',
     overflow: 'hidden',
+    padding: '20px', // Added padding for smaller screens
   },
   backgroundImage: {
     position: 'absolute',
@@ -32,7 +33,7 @@ const styles: { [key: string]: CSSProperties } = {
   registerBox: {
     backgroundColor: 'rgba(255,255,255,0.05)',
     backdropFilter: 'blur(10px)',
-    padding: '40px',
+    padding: '30px', // Reduced padding from 40px
     borderRadius: '20px',
     width: '100%',
     maxWidth: '400px',
@@ -44,45 +45,46 @@ const styles: { [key: string]: CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '30px',
+    marginBottom: '20px', // Reduced from 30px
   },
   logoText: {
-    fontSize: '34px',
+    fontSize: '30px', // Reduced from 34px
     fontWeight: 'bold',
     color: '#d0ece7',
     fontFamily: "'Lilita One', cursive",
   },
   title: {
-    fontSize: '24px',
+    fontSize: '22px', // Reduced from 24px
     fontWeight: 'bold',
     marginBottom: '20px',
     textAlign: 'center',
     color: '#ffffff',
   },
   inputGroup: {
-    marginBottom: '20px',
+    marginBottom: '15px', // Reduced from 20px
   },
   nameGroup: {
     display: 'flex',
-    gap: '12px',
-    marginBottom: '20px',
+    gap: '10px', // Reduced from 12px
+    marginBottom: '15px', // Reduced from 20px
   },
   nameInput: {
     flex: 1,
   },
   label: {
     display: 'block',
-    marginBottom: '8px',
+    marginBottom: '6px', // Reduced from 8px
     color: 'rgba(255,255,255,0.8)',
+    fontSize: '14px', // Added smaller font size
   },
   input: {
     width: '100%',
-    padding: '12px',
+    padding: '10px', // Reduced from 12px
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.1)',
     backgroundColor: 'rgba(255,255,255,0.05)',
     color: '#ffffff',
-    fontSize: '16px',
+    fontSize: '14px', // Reduced from 16px
     outline: 'none',
     transition: 'all 0.3s ease',
   },
@@ -92,7 +94,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
   button: {
     width: '100%',
-    padding: '12px',
+    padding: '10px', // Reduced from 12px
     borderRadius: '8px',
     border: 'none',
     backgroundColor: '#3b82f6',
@@ -101,6 +103,7 @@ const styles: { [key: string]: CSSProperties } = {
     fontWeight: 'bold',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
+    marginTop: '10px', // Added margin top
   },
   buttonHover: {
     backgroundColor: '#2563eb',
@@ -113,19 +116,19 @@ const styles: { [key: string]: CSSProperties } = {
   },
   passwordInput: {
     width: '100%',
-    padding: '12px',
-    paddingRight: '45px',
+    padding: '10px', // Reduced from 12px
+    paddingRight: '40px', // Reduced padding right
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.1)',
     backgroundColor: 'rgba(255,255,255,0.05)',
     color: '#ffffff',
-    fontSize: '16px',
+    fontSize: '14px', // Reduced from 16px
     outline: 'none',
     transition: 'all 0.3s ease',
   },
   eyeIcon: {
     position: 'absolute',
-    right: '12px',
+    right: '10px', // Adjusted right position
     top: '50%',
     transform: 'translateY(-50%)',
     cursor: 'pointer',
@@ -138,8 +141,9 @@ const styles: { [key: string]: CSSProperties } = {
   },
   loginLink: {
     textAlign: 'center',
-    marginTop: '20px',
+    marginTop: '15px', // Reduced from 20px
     color: 'rgba(255,255,255,0.6)',
+    fontSize: '14px', // Smaller font size
   },
   loginLinkText: {
     color: '#3b82f6',
@@ -148,7 +152,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
   homeButton: {
     display: 'block',
-    marginTop: '20px',
+    marginTop: '15px', // Reduced from 20px
     textAlign: 'center',
     color: '#3b82f6',
     fontSize: '24px',
@@ -158,7 +162,6 @@ const styles: { [key: string]: CSSProperties } = {
   homeButtonHover: {
     color: '#2563eb',
   },
-
 };
 
 const Register = () => {
@@ -283,7 +286,7 @@ const Register = () => {
             <img 
               src="/falcons_logo.png" 
               alt="LAMB FALCONS Logo" 
-              style={{ width: '80px', height: '80px', objectFit: 'contain' }} 
+              style={{ width: '60px', height: '60px', objectFit: 'contain' }} 
             />
           </div>
         </a>
@@ -330,7 +333,7 @@ const Register = () => {
               required
             />
             {errors.email && (
-              <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
+              <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '2px' }}>
                 {errors.email}
               </div>
             )}
@@ -351,7 +354,7 @@ const Register = () => {
               required
             />
             {errors.phoneNumber && (
-              <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
+              <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '2px' }}>
                 {errors.phoneNumber}
               </div>
             )}
@@ -384,11 +387,11 @@ const Register = () => {
                   e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
                 }}
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </div>
             </div>
             {errors.password && (
-              <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
+              <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '2px' }}>
                 {errors.password}
               </div>
             )}
@@ -421,11 +424,11 @@ const Register = () => {
                   e.currentTarget.style.color = 'rgba(255,255,255,0.6)';
                 }}
               >
-                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </div>
             </div>
             {errors.confirmPassword && (
-              <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '4px' }}>
+              <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '2px' }}>
                 {errors.confirmPassword}
               </div>
             )}
@@ -467,4 +470,4 @@ const Register = () => {
   );
 };
 
-export default Register; 
+export default Register;
